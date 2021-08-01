@@ -166,7 +166,7 @@ d3.csv("https://aberk104.github.io/circles.csv", prepare, function(data) {
       button.text("Play");
     } else {
       moving = true;
-      timer = setInterval(step, 100);
+      timer = setInterval(step, 1);
       button.text("Pause");
     }
     console.log("Slider moving: " + moving);
