@@ -14,6 +14,9 @@
     <script src="https://d3js.org/topojson.v2.min.js"></script>
 </head>
 <body>
+<h1>
+COVID Cases by US State Over Time
+</h1>
 <script type="text/javascript">
 const width = 900;
 const height = 600;
@@ -35,10 +38,6 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
 });
-async function init() {
-data = await d3.csv("https://github.com/aberk104/aberk104.github.io/blob/main/us-states-transformed.csv");
-}
-
 </script>
 </body>
 </html>
