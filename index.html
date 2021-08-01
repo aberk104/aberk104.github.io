@@ -142,6 +142,13 @@ var label = slider.append("text")
     .text(formatDate(startDate))
     .attr("transform", "translate(0," + (-25) + ")")
 
+function update(h) {
+  // update position and text of label according to slider scale
+  handle.attr("cx", x(h));
+  label
+    .attr("x", x(h))
+    .text(formatDate(h));
+
 </script>
 </body>
 </html>
