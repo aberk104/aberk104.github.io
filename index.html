@@ -10,6 +10,27 @@
         fill: black;
     }
 
+
+    #play-button {
+      position: absolute;
+      top: 140px;
+      left: 50px;
+      background: #f08080;
+      padding-right: 26px;
+      border-radius: 3px;
+      border: none;
+      color: white;
+      margin: 0;
+      padding: 0 12px;
+      width: 60px;
+      cursor: pointer;
+      height: 30px;
+    }
+
+    #play-button:hover {
+      background-color: #696969;
+    }    
+    
     .ticks {
       font-size: 10px;
     }
@@ -53,31 +74,11 @@
 <h1>
 COVID-19 Cases by US State Over Time
 </h1>
-<div id="slider"></div>
-<script type="text/javascript">
-const width = 900;
-const height = 600;
-const svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
- 
-const projection = d3.geoAlbersUsa()
-    .translate([width / 2, height / 2]) // translate to center of screen
-    .scale([1000]); // scale things down so see entire US
- 
-const path = d3.geoPath().projection(projection);
- 
-d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
-if (error) throw error;
-    svg.selectAll('path')
-        .data(uState.features)
-        .enter()
-        .append('path')
-        .attr("d", path)
-        .attr('class','state')
-});
-</script>
-<script>
+<div id="vis">
+  <button id="play-button">Play</button>
+  </div>
+  <script>
+
 var formatDateIntoYear = d3.timeFormat("%Y");
 var formatDate = d3.timeFormat("%b %Y");
 var parseDate = d3.timeParse("%m/%d/%y");
@@ -85,25 +86,31 @@ var parseDate = d3.timeParse("%m/%d/%y");
 var startDate = new Date("2004-11-01"),
     endDate = new Date("2017-04-01");
 
-var margin = {top:0, right:50, bottom:0, left:50},
+var margin = {top:50, right:50, bottom:0, left:50},
     width = 960 - margin.left - margin.right,
-    height = 200 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom;
+
+var svg = d3.select("#vis")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom);  
 
 ////////// slider //////////
 
-var svgSlider = d3.select("#slider")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height);
+var moving = false;
+var currentValue = 0;
+var targetValue = width;
+
+var playButton = d3.select("#play-button");
     
 var x = d3.scaleTime()
     .domain([startDate, endDate])
-    .range([0, width])
+    .range([0, targetValue])
     .clamp(true);
 
-var slider = svgSlider.append("g")
+var slider = svg.append("g")
     .attr("class", "slider")
-    .attr("transform", "translate(" + margin.left + "," + height / 2 + ")");
+    .attr("transform", "translate(" + margin.left + "," + height/5 + ")");
 
 slider.append("line")
     .attr("class", "track")
@@ -115,7 +122,11 @@ slider.append("line")
     .attr("class", "track-overlay")
     .call(d3.drag()
         .on("start.interrupt", function() { slider.interrupt(); })
-        .on("start drag", function() { update(x.invert(d3.event.x)); }));
+        .on("start drag", function() {
+          currentValue = d3.event.x;
+          update(x.invert(currentValue)); 
+        })
+    );
 
 slider.insert("g", ".track-overlay")
     .attr("class", "ticks")
@@ -139,6 +150,45 @@ var label = slider.append("text")
     .text(formatDate(startDate))
     .attr("transform", "translate(0," + (-25) + ")")
 
+ 
+  playButton
+    .on("click", function() {
+    var button = d3.select(this);
+    if (button.text() == "Pause") {
+      moving = false;
+      clearInterval(timer);
+      // timer = 0;
+      button.text("Play");
+    } else {
+      moving = true;
+      timer = setInterval(step, 100);
+      button.text("Pause");
+    }
+    console.log("Slider moving: " + moving);
+  })
+})
+
+function prepare(d) {
+  d.id = d.id;
+  d.date = parseDate(d.date);
+  return d;
+}
+  
+function step() {
+  update(x.invert(currentValue));
+  currentValue = currentValue + (targetValue/151);
+  if (currentValue > targetValue) {
+    moving = false;
+    currentValue = 0;
+    clearInterval(timer);
+    // timer = 0;
+    playButton.text("Play");
+    console.log("Slider moving: " + moving);
+  }
+}
+
+
+
 function update(h) {
   // update position and text of label according to slider scale
   handle.attr("cx", x(h));
@@ -146,6 +196,37 @@ function update(h) {
     .attr("x", x(h))
     .text(formatDate(h));
 
+  // filter data set and redraw plot
+  var newData = dataset.filter(function(d) {
+    return d.date < h;
+  })
+  drawPlot(newData);
+}
+
+</script>
+
+<script type="text/javascript">
+const width = 900;
+const height = 600;
+const svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+ 
+const projection = d3.geoAlbersUsa()
+    .translate([width / 2, height / 2]) // translate to center of screen
+    .scale([1000]); // scale things down so see entire US
+ 
+const path = d3.geoPath().projection(projection);
+ 
+d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
+if (error) throw error;
+    svg.selectAll('path')
+        .data(uState.features)
+        .enter()
+        .append('path')
+        .attr("d", path)
+        .attr('class','state')
+});
 </script>
 </body>
 </html>
