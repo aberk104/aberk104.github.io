@@ -37,6 +37,11 @@ if (error) throw error;
         .enter()
         .append('path')
         .attr("d", path)
+        .attr('class','state')
+        .state:hover {
+        fill: red;
+        cursor: pointer;
+        }
 });
 </script>
 </body>
