@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>D3 World Map</title>
-    <style>
-    path {
-        stroke: white;
-        stroke-width: 0.5px;
-        fill: black;
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    body {
+      font-family:"avenir next", Arial, sans-serif;
+      font-size: 12px;
+      color: #696969;
     }
-
 
     #play-button {
       position: absolute;
@@ -65,19 +63,14 @@
       stroke-opacity: 0.5;
       stroke-width: 1.25px;
     }
-
-    </style>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/topojson.v2.min.js"></script>
+  </style>
 </head>
+
 <body>
-<h1>
-COVID-19 Cases by US State Over Time
-</h1>
 <div id="vis">
   <button id="play-button">Play</button>
-  </div>
-  <script>
+</div>
+<script>
 
 var formatDateIntoYear = d3.timeFormat("%Y");
 var formatDate = d3.timeFormat("%b %Y");
@@ -151,6 +144,18 @@ var label = slider.append("text")
     .attr("transform", "translate(0," + (-25) + ")")
 
  
+////////// plot //////////
+
+var dataset;
+
+var plot = svg.append("g")
+    .attr("class", "plot")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.csv("https://github.com/aberk104/aberk104.github.io/blob/main/circles.csv", prepare, function(data) {
+  dataset = data;
+  drawPlot(dataset);
+  
   playButton
     .on("click", function() {
     var button = d3.select(this);
@@ -187,7 +192,30 @@ function step() {
   }
 }
 
+function drawPlot(data) {
+  var locations = plot.selectAll(".location")
+    .data(data);
 
+  // if filtered dataset has more circles than already existing, transition new ones in
+  locations.enter()
+    .append("circle")
+    .attr("class", "location")
+    .attr("cx", function(d) { return x(d.date); })
+    .attr("cy", height/2)
+    .style("fill", function(d) { return d3.hsl(d.date/1000000000, 0.8, 0.8)})
+    .style("stroke", function(d) { return d3.hsl(d.date/1000000000, 0.7, 0.7)})
+    .style("opacity", 0.5)
+    .attr("r", 8)
+      .transition()
+      .duration(400)
+      .attr("r", 25)
+        .transition()
+        .attr("r", 8);
+
+  // if filtered dataset has less circles than already existing, remove excess
+  locations.exit()
+    .remove();
+}
 
 function update(h) {
   // update position and text of label according to slider scale
@@ -204,29 +232,4 @@ function update(h) {
 }
 
 </script>
-
-<script type="text/javascript">
-const width = 900;
-const height = 600;
-const svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
- 
-const projection = d3.geoAlbersUsa()
-    .translate([width / 2, height / 2]) // translate to center of screen
-    .scale([1000]); // scale things down so see entire US
- 
-const path = d3.geoPath().projection(projection);
- 
-d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
-if (error) throw error;
-    svg.selectAll('path')
-        .data(uState.features)
-        .enter()
-        .append('path')
-        .attr("d", path)
-        .attr('class','state')
-});
-</script>
 </body>
-</html>
