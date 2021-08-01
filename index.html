@@ -152,7 +152,7 @@ var plot = svg.append("g")
     .attr("class", "plot")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("https://github.com/aberk104/aberk104.github.io/blob/main/circles.csv", prepare, function(data) {
+d3.csv("https://aberk104.github.io/circles.csv", prepare, function(data) {
   dataset = data;
   drawPlot(dataset);
   
