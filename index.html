@@ -43,7 +43,7 @@ if (error) throw error;
 init();
 
 async function init() {
-coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv", function(data) { console.log(data); });
+coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv")//, function(data) { console.log(data); });
 
 //data = ["Test 1","Test 2"]
 
@@ -53,6 +53,24 @@ coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.cs
 
 //d3.select("body").selectAll("p").data(coviddata).text(function(d) { return d; });
 }
+
+var format = function(d) {
+    d = d / 1000000;
+    return d3.format(',.02f')(d) + 'M';
+}
+
+var map = d3.choropleth()
+    .geofile('/d3-geomap/topojson/world/countries.json')
+    .colors(d3.schemeYlGnBu[9])
+    .column('5/1/2021')
+    .format(format)
+    .legend(true)
+    .unitId('fips');
+
+d3.data(coviddata).then(data => {
+    var selection = d3.select('#map').datum(data);
+    map.draw(selection);
+});
 
 </script>
 </body>
