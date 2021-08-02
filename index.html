@@ -52,7 +52,7 @@ if (error) throw error;
 init();
 
 async function init() {
-coviddata = await d3.csv("/us_states_covid_data.csv", function(data) { console.log(data); });
+coviddata = await d3.csv("https://aberk104.github.io/us_states_covid_data.csv", function(data) { console.log(data); });
 
 data = ["Test 1","Test 2"]
 
