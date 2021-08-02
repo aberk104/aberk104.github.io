@@ -51,7 +51,10 @@ Monthly COVID-19 Cases Per 100,000 People by US State
 
 coviddata = d3.csv("https://aberk104.github.io/us_states_covid_data.csv", function(data) { console.log(data); });
 
-d3.select("body").selectAll("p").enter().append("p").text(Test Changes);
+data = ["Test 1","Test 2"]
+
+d3.select("body").selectAll("p").data(data).enter().append("p").text(function(d) { return d; });
+
 //d3.select("body").selectAll("p").data(coviddata).enter().append("p").text(function(d) { return d.State + ", " + d.Date + ", " + d.MonthlyCasesPer100000People; });
 
 </script>
