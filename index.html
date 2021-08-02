@@ -56,7 +56,7 @@ coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.cs
 
 
 var map = d3.choropleth()
-    .geofile('https://d3-geomap.github.io//d3-geomap/topojson/countries/USA.json')
+    .geofile('https://d3-geomap.github.io/d3-geomap/topojson/countries/USA.json')
     .projection(d3.geoAlbersUsa)
     .column('5/1/2021')
     .unitId('fips')
