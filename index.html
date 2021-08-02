@@ -43,7 +43,7 @@ var coviddata = d3.csv("https://aberk104.github.io/us_states_covid_data.csv", fu
 console.log(data);
 });
 
-d3.select("body").selectAll("p").data(coviddata).enter().append("p");
+d3.select("body").selectAll("p").data(coviddata).enter().append("p").text(function(d) { return d.State + ", " + d.MonthlyCasesPer100000People; });
 
 </script>
 </body>
