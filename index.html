@@ -66,6 +66,13 @@ if (error) throw error;
         .attr("d", path)
         .attr('class','state')
         .attr("fill", "blue")
+        .on("mouseover", function(d) {      
+    	div.transition()        
+      	   .duration(200)      
+           .style("opacity", .9);      
+           div.text(uState.Name)
+           .style("left", (d3.event.pageX) + "px")     
+           .style("top", (d3.event.pageY - 28) + "px");
 });
 
 //init();
