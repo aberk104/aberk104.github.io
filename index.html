@@ -17,16 +17,7 @@
 <h1>
 Monthly COVID-19 Cases Per 100,000 People by US State
 </h1>
-<p>1</p>
-<p>2</p>
-<p>3</p>
-<p>4</p>
-<p>5</p>
-<p>6</p>
-<p>7</p>
-<p>8</p>
-<p>9</p>
-<p>10</p>
+
 <script>
 const width = 900;
 const height = 600;
@@ -40,7 +31,7 @@ const projection = d3.geoAlbersUsa()
 
 const path = d3.geoPath().projection(projection);
 
-d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
+d3.json("https://github.com/PublicaMundi/MappingAPI/blob/master/data/geojson/us-states.json", function(error, uState) {
 if (error) throw error;
     svg.selectAll('path')
         .data(uState.features)
