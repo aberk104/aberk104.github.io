@@ -14,7 +14,7 @@
     <script src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://d3-geomap.github.io/d3-geomap/d3-geomap.min.js"></script>
 </head>
-<body onload='init()'>
+<body>
 <h1>
 Monthly COVID-19 Cases Per 100,000 People by US State
 </h1>
@@ -43,8 +43,8 @@ if (error) throw error;
 
 init(); */
 
-async function init() {
-coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv")//, function(data) { console.log(data); });
+//async function init() {
+//coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv")//, function(data) { console.log(data); });
 
 //data = ["Test 1","Test 2"]
 
@@ -63,10 +63,10 @@ var map = d3.choropleth()
     .scale(1000)
     .legend(true);
 
-d3.data(coviddata).then(data => {
+d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv").then(data => {
     map.draw(d3.select('#map').datum(data));
 });
-}
+//}
 </script>
 </body>
 </html>
