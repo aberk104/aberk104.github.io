@@ -15,8 +15,21 @@
 }
 
 .state:hover {
-  fill: red;
+  fill-opacity: .7;
   cursor: pointer;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
 }
     </style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -28,6 +41,10 @@ Monthly COVID-19 Cases Per 100,000 People by US State
 </h1>
 
 <script>
+var div = d3.select("body").append("div")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
+
 const width = 900;
 const height = 600;
 const svg = d3.select("body").append("svg")
