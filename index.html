@@ -9,6 +9,15 @@
         stroke-width: 0.5px;
         
     }
+    .state {
+  stroke-width: 1;
+  stroke: #ffffff;
+}
+
+.state:hover {
+  fill: red;
+  cursor: pointer;
+}
     </style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
@@ -38,6 +47,7 @@ if (error) throw error;
         .enter()
         .append('path')
         .attr("d", path)
+        .attr('class','state')
         .attr("fill", "blue")
 });
 
