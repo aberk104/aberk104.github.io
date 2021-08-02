@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>D3 World Map</title>
-    <link href="https://d3-geomap.github.io/d3-geomap/d3-geomap.css" rel="stylesheet">
     <style>
     path {
         stroke: white;
@@ -13,7 +12,6 @@
     </style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
-    <script src="https://d3-geomap.github.io/d3-geomap/d3-geomap.min.js"></script>
 </head>
 <body>
 <h1>
@@ -22,7 +20,7 @@ Monthly COVID-19 Cases Per 100,000 People by US State
 <div class="d3-geomap" id="map"></div>
 
 <script>
-/*-- const width = 900;
+const width = 900;
 const height = 600;
 const svg = d3.select("body").append("svg")
     .attr("width", width)
@@ -43,10 +41,10 @@ if (error) throw error;
         .attr("d", path)
 });
 
-init(); */
+//init();
 
-//async function init() {
-//coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv")//, function(data) { console.log(data); });
+async function init() {
+coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv")//, function(data) { console.log(data); });
 
 //data = ["Test 1","Test 2"]
 
@@ -56,24 +54,7 @@ init(); */
 
 //d3.select("body").selectAll("p").data(coviddata).text(function(d) { return d; });
 
-
-var map = d3.geomap()
-    .geofile('https://d3-geomap.github.io/d3-geomap/topojson/countries/USA.json')
-    .draw(d3.select('#map'));
-
-/*var map = d3.choropleth()
-    .geofile('https://d3-geomap.github.io/d3-geomap/topojson/countries/USA.json')
-    .projection(d3.geoAlbersUsa)
-    .column('5/1/2021')
-    .unitId('fips')
-    .scale(1000)
-    .legend(true);
-
-d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv").then(data => {
-    map.draw(d3.select('#map').datum(data));
-});
-*/
-
+}
 </script>
 </body>
 </html>
