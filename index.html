@@ -13,7 +13,7 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
 </head>
-<body onload='init()'>
+<body>
 <h1>
 Monthly COVID-19 Cases Per 100,000 People by US State
 </h1>
@@ -48,6 +48,8 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
 });
+
+init();
 
 async function init() {
 const coviddata = await d3.csv("https://aberk104.github.io/us_states_covid_data.csv")//, function(data) { console.log(data); });
