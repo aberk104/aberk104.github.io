@@ -65,7 +65,6 @@ var map = d3.choropleth()
 
 d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv").then(data => {
     map.draw(d3.select('#map').datum(data));
-});
 //}
 </script>
 </body>
