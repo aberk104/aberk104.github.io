@@ -38,6 +38,11 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
 });
+
+var coviddata = d3.csv("https://aberk104.github.io/us_states_covid_data.csv", function(data) {
+console.log(data);
+});
+
 </script>
 </body>
 </html>
