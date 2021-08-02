@@ -12,7 +12,7 @@
     </style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
-    <script src="/d3-geomap/d3-geomap.min.js"></script>
+    <script src="https://d3-geomap.github.io/d3-geomap/d3-geomap.min.js"></script>
 </head>
 <body onload='init()'>
 <h1>
@@ -55,22 +55,16 @@ coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.cs
 //d3.select("body").selectAll("p").data(coviddata).text(function(d) { return d; });
 }
 
-var format = function(d) {
-    d = d / 1000000;
-    return d3.format(',.02f')(d) + 'M';
-}
-
 var map = d3.choropleth()
-    .geofile('/d3-geomap/topojson/world/countries.json')
-    .colors(d3.schemeYlGnBu[9])
+    .geofile('https://d3-geomap.github.io//d3-geomap/topojson/countries/USA.json')
+    .projection(d3.geoAlbersUsa)
     .column('5/1/2021')
-    .format(format)
-    .legend(true)
-    .unitId('fips');
+    .unitId('fips')
+    .scale(1000)
+    .legend(true);
 
 d3.data(coviddata).then(data => {
-    var selection = d3.select('#map').datum(data);
-    map.draw(selection);
+    map.draw(d3.select('#map').datum(data));
 });
 
 </script>
