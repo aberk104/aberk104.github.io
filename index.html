@@ -70,7 +70,7 @@ if (error) throw error;
     	div.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           div.text("Test Name")
+           div.text(uState.features.id)
            .style("left", (d3.event.pageX) + "px")     
            .style("top", (d3.event.pageY - 48) + "px")
 	 ;})
