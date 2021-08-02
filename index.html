@@ -70,15 +70,15 @@ if (error) throw error;
     	div.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           div.text(uState.features.properties.name)
-//           .style("left", (d3.event.pageX) + "px")     
-//           .style("top", (d3.event.pageY - 28) + "px")
+           div.text(uState.features.properties.map(function(d) { return d.name; }))
+           .style("left", (d3.event.pageX) + "px")     
+           .style("top", (d3.event.pageY - 48) + "px")
 	 ;})
 	 
     // fade out tooltip on mouse out               
     .on("mouseout", function(d) {       
         div.transition()        
-           .duration(500)      
+           .duration(200)      
            .style("opacity", 0);   
     });
 });
