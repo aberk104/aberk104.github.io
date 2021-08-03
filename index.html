@@ -42,15 +42,14 @@ div.tooltip {
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
 </head>
-<body onload='init()'>
+<body>
 <h1 style="text-align:center;">
 Monthly COVID-19 Cases Per 100,000 People by US State
 </h1>
 
 <script>
 //Starting Point for US States JSON File is https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json//
-async function init() {
-coviddata = await d3.json("/us_states2.json")};
+coviddata = await d3.json("/us_states2.json")
 
 var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
