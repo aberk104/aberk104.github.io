@@ -84,6 +84,9 @@ var maxrates = [0.02,0.66,377.26,1155.79,649.41,831.48,1476.22,817.32,1287.26,28
 
 d3.json("/us_states2.json", function(error, uState) {
 if (error) throw error;
+var max = d3.max(uState, function(d) {return +d.features.properties.Jun20; })
+
+
     svg.selectAll('path')
         .data(uState.features)
         .enter()
@@ -95,7 +98,7 @@ if (error) throw error;
     	div.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           div.html(d.properties.name + "<br>" + "FIPS ID: " + d.id + "<br>" + "Cases Per 100K: " + d.properties.Jun20 + "<br>" + "Max Rate: " + d3.select(maxrates.nodes()[6]))
+           div.html(d.properties.name + "<br>" + "FIPS ID: " + d.id + "<br>" + "Cases Per 100K: " + d.properties.Jun20 + "<br>" + "Max Rate: " + d3.select(maxrates.nodes()[6]) + "<br>" + "Test Max: " + max)
            .style("left", (d3.event.pageX) + "px")     
            .style("top", (d3.event.pageY - 60) + "px")
 	 ;})
