@@ -110,7 +110,6 @@ body {
     </style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
-    <script src="https://github.com/MasterMaps/d3-slider"></script>
 </head>
 <body>
 <h1 style="text-align:center;">Monthly COVID-19 Cases Per 100,000 People by US State</h1>
@@ -128,24 +127,24 @@ var startDate = new Date("2020-01-01"),
     endDate = new Date("2021-06-01");
 */
 var sliderdates = ["Jan 2020","Feb 2020","Mar 2020","Apr 2020","May 2020","Jun 2020","Jul 2020","Aug 2020","Sep 2020","Oct 2020","Nov 2020","Dec 2020","Jan 2021","Feb 2021","Mar 2021","Apr 2021","May 2021","Jun 2021"]
-/*
+
 var slidermargin = {top:150, right:150, bottom:0, left:150},
     sliderwidth = 960 - slidermargin.left - slidermargin.right,
     sliderheight = 500 - slidermargin.top - slidermargin.bottom;
 
-var svgslider = d3.select("#vis")
+/*var svgslider = d3.select("#vis")
     .append("svgslider")
     .attr("width", sliderwidth + slidermargin.left + slidermargin.right)
     .attr("height", sliderheight + slidermargin.top + slidermargin.bottom);  
-
+*/
 ////////// slider //////////
-
+/*
 var moving = false;
 var currentValue = 0;
 var targetValue = sliderwidth;
-
+*/
 var playButton = d3.select("#play-button");
-    
+/*    
 var x = d3.scaleOrdinal(sliderdates);
 
 var slider = svgslider.append("g")
@@ -219,7 +218,6 @@ const path = d3.geoPath().projection(projection);
 d3.json("/us_states.json", function(error, uState) {
 if (error) throw error;
 
-    d3.slider().scale(d3.scale.ordinal().domain(sliderdates).rangePoints([0, 1], 0.5)).axis( d3.svg.axis() ).snap(true).value("Jan 2020")
     // Determine Max COVID-19 Rate for that Month
     var min = d3.min(uState.features, function(d) {return d.properties.Jul20; });
     var max = d3.max(uState.features, function(d) {return d.properties.Jul20; });
