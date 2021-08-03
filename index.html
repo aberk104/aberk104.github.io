@@ -126,20 +126,20 @@ var parseDate = d3.timeParse("%m/%d/%y");
 var startDate = new Date("2020-01-01"),
     endDate = new Date("2021-06-01");
 
-var margin = {top:50, right:50, bottom:0, left:50},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var slidermargin = {top:50, right:50, bottom:0, left:50},
+    sliderwidth = 960 - slidermargin.left - slidermargin.right,
+    sliderheight = 500 - slidermargin.top - slidermargin.bottom;
 
 var svgslider = d3.select("#vis")
     .append("svgslider")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom);  
+    .attr("width", sliderwidth + slidermargin.left + slidermargin.right)
+    .attr("height", sliderheight + slidermargin.top + slidermargin.bottom);  
 
 ////////// slider //////////
 
 var moving = false;
 var currentValue = 0;
-var targetValue = width;
+var targetValue = sliderwidth;
 
 var playButton = d3.select("#play-button");
     
@@ -150,7 +150,7 @@ var x = d3.scaleTime()
 
 var slider = svgslider.append("g")
     .attr("class", "slider")
-    .attr("transform", "translate(" + margin.left + "," + height/5 + ")");
+    .attr("transform", "translate(" + slidermargin.left + "," + sliderheight/5 + ")");
 
 slider.append("line")
     .attr("class", "track")
