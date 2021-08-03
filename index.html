@@ -76,7 +76,7 @@ const path = d3.geoPath().projection(projection);
 
 
 
-var maxrate = d3.max(coviddata, function(d) {return +d.features.properties.Jun20; });
+var max = d3.max(coviddata, function(d) {return +d.features.properties.Jun20; });
 
 d3.json("/us_states2.json", function(error, uState) {
 if (error) throw error;
@@ -86,12 +86,12 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", function(d, i) {return myColor(d.properties.Jun20 / maxrate); })
+        .attr("fill", function(d) {return myColor(d.properties.Jun20 / maxrate); })
         .on("mouseover", function(d) {      
     	div.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           div.html(d.properties.name + "<br>" + "FIPS ID: " + d.id + "<br>" + "Cases Per 100K: " + d.properties.Jun20 + "<br>" + "Max Rate: " + maxrate)
+           div.html(d.properties.name + "<br>" + "FIPS ID: " + d.id + "<br>" + "Cases Per 100K: " + d.properties.Jun20 + "<br>" + "Max Rate: " + max)
            .style("left", (d3.event.pageX) + "px")     
            .style("top", (d3.event.pageY - 60) + "px")
 	 ;})
