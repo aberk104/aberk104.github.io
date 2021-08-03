@@ -47,7 +47,7 @@ body {
 /* Legend Position Style */
 .legend {
 	position:absolute;
-	left:800px;
+	left:1200px;
 	top:350px;
 }
     </style>
@@ -140,7 +140,7 @@ const legend = d3.select("body").append('svg')
     //Every node in teh data should have a 'g' appended
     .enter().append('g')
     //the 'g' should have this attribute
-    .attr("transform", function(d, i) { return "translate(0," + i * 250 + ")"; });
+    .attr("transform", function(d, i) { return "translate(250," + i * 20 + ")"; });
 //Inside every 'legend', insert a rect
 legend.append("rect")
     //that's 18px wide
