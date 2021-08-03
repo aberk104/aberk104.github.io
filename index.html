@@ -48,7 +48,7 @@ div.tooltip {
 
 <script>
 //Starting Point for US States JSON File is https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json//
-coviddata = d3.json("/us_states2.json")
+//coviddata = d3.json("/us_states2.json")
 
 var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
@@ -75,7 +75,7 @@ const path = d3.geoPath().projection(projection);
 
 
 
-var maxrates = [0.02,0.66,377.26,1155.79,649.41,831.48,1476.22,817.32,1287.26,2833.03,4535.65,2983.24,3282.49,1434.76,1286.02,1882.97,561.44,168.33]
+//var maxrates = [0.02,0.66,377.26,1155.79,649.41,831.48,1476.22,817.32,1287.26,2833.03,4535.65,2983.24,3282.49,1434.76,1286.02,1882.97,561.44,168.33]
 
 //var testrates = 
 
@@ -84,27 +84,32 @@ var maxrates = [0.02,0.66,377.26,1155.79,649.41,831.48,1476.22,817.32,1287.26,28
 
 d3.json("/us_states2.json", function(error, uState) {
 if (error) throw error;
-var max = d3.max(uState.features, function(d) {return d.properties.Jun20; });
+
+    // Determine Max COVID-19 Rate for that Month
+    var max = d3.max(uState.features, function(d) {return d.properties.Jul20; });
 
 
+	// Display US Map Choropleth Based on Monthly COVID-19 Cases per 100,000
     svg.selectAll('path')
         .data(uState.features)
         .enter()
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", function(d) {return myColor(d.properties.Jun20 / maxrates[5]); })
+        .attr("fill", function(d) {return myColor(d.properties.Jul20 / max); })
+
+	// Display Tooltip on Hover Over
         .on("mouseover", function(d) {      
     	div.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           div.html(d.properties.name + "<br>" + "FIPS ID: " + d.id + "<br>" + "Cases Per 100K: " + d.properties.Jun20 + "<br>" + "Max Rate: " + maxrates[5] + "<br>" + "Test Max: " + max)
+           div.html(d.properties.name + "<br>" + "FIPS ID: " + d.id + "<br>" + "Cases Per 100K: " + d.properties.Jul20 + "<br>" + "Max Rate: " + max)
            .style("left", (d3.event.pageX) + "px")     
            .style("top", (d3.event.pageY - 60) + "px")
 	 ;})
 	 
-    // fade out tooltip on mouse out               
-    .on("mouseout", function(d) {       
+	// Remove Tooltip on Mouse Out               
+       .on("mouseout", function(d) {       
         div.transition()        
            .duration(200)      
            .style("opacity", 0);   
