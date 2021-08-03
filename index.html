@@ -18,7 +18,7 @@ path {
     }
     .state {
   stroke-width: 1;
-  stroke: #ffffff;
+  stroke: black;
 }
 
 .state:hover {
@@ -53,7 +53,7 @@ var div = d3.select("body").append("div")
     .style("opacity", 0);
 
 var myColor = d3.scaleLinear().domain([0,1])
-  .range(["lightblue", "blue"])
+  .range(["lightblue", "darkblue"])
 
 const width = 900;
 const height = 600;
