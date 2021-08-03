@@ -76,7 +76,7 @@ const path = d3.geoPath().projection(projection);
 
 
 
-var maxrate = d3.max(coviddata, function(d) {return d.features.properties.Jun20; });
+var maxrate = d3.max(coviddata, function(d) {return +d.features.properties.Jun20; });
 
 d3.json("/us_states2.json", function(error, uState) {
 if (error) throw error;
