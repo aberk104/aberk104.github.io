@@ -145,8 +145,7 @@ var targetValue = sliderwidth;
 
 var playButton = d3.select("#play-button");
     
-var x = d3.scaleOrdinal(sliderdates)
-    .clamp(true);
+var x = d3.scaleOrdinal(sliderdates);
 
 var slider = svgslider.append("g")
     .attr("class", "slider")
