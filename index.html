@@ -155,8 +155,8 @@ legend.append("text")
     .attr("x", 24)
     .attr("y", 9)
     .attr("dy", ".35em")
-    .data(legenddata)
-    .text(function(d,i) { return i; });
+    .data(legenddata.reverse())
+    .text(function(d,i) { return d; });
     
 });
 
