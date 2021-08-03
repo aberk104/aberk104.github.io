@@ -48,13 +48,16 @@ Monthly COVID-19 Cases Per 100,000 People by US State
 </h1>
 
 <script>
-async function init() {
-coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv")//, function(data) { console.log(data); });
-}
+//async function init() {
+//coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv")//, function(data) { console.log(data); });
+//}
 
 var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
+
+var myColor = d3.scaleLinear().domain([0,1])
+  .range(["white", "blue"])
 
 const width = 900;
 const height = 600;
@@ -70,6 +73,11 @@ const projection = d3.geoAlbersUsa()
 const path = d3.geoPath().projection(projection);
 
 //d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
+
+coviddata = d3.json("/us_states2.json")
+
+maxrate = d3.max(coviddata, function(d, i) {return d.Jun20; });
+
 d3.json("/us_states2.json", function(error, uState) {
 if (error) throw error;
     svg.selectAll('path')
@@ -78,7 +86,7 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", "blue")
+        .attr("fill", function(d, i) {return myColor(d.Jun20 / maxrate); })
         .on("mouseover", function(d) {      
     	div.transition()        
       	   .duration(200)      
@@ -96,8 +104,7 @@ if (error) throw error;
     });
 });
 
-var myColor = d3.scaleLinear().domain([0,1])
-  .range(["white", "blue"])
+
 
 //init();
 
