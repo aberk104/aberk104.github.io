@@ -86,7 +86,7 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", function(d) {return myColor(d.properties.Jun20 / maxrate); })
+        .attr("fill", function(d) {return myColor(d.properties.Jun20 / max); })
         .on("mouseover", function(d) {      
     	div.transition()        
       	   .duration(200)      
