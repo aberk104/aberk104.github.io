@@ -29,7 +29,7 @@ path {
 div.tooltip {
     position: absolute;
     text-align: center;
-    width: 100px;
+    width: 150px;
     height: 40px;
     padding: 2px;
     font: 12px sans-serif;
@@ -48,10 +48,6 @@ Monthly COVID-19 Cases Per 100,000 People by US State
 </h1>
 
 <script>
-//async function init() {
-//coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv")//, function(data) { console.log(data); });
-//}
-
 var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
@@ -74,6 +70,8 @@ const path = d3.geoPath().projection(projection);
 
 //d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
 
+
+//Starting Point for US States JSON File is https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json//
 coviddata = d3.json("/us_states2.json")
 
 maxrate = d3.max(coviddata, function(d, i) {return +d.Jun20; });
