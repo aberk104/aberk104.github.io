@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>D3 World Map</title>
+    <title>D3 US Map</title>
     <style>
     body,
 svg {
@@ -48,6 +48,10 @@ Monthly COVID-19 Cases Per 100,000 People by US State
 </h1>
 
 <script>
+async function init() {
+coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv")//, function(data) { console.log(data); });
+}
+
 var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
     .style("opacity", 0);
@@ -65,7 +69,8 @@ const projection = d3.geoAlbersUsa()
 
 const path = d3.geoPath().projection(projection);
 
-d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
+//d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
+d3.json("/us-states.json", function(error, uState) {
 if (error) throw error;
     svg.selectAll('path')
         .data(uState.features)
@@ -91,20 +96,14 @@ if (error) throw error;
     });
 });
 
+var myColor = d3.scaleLinear().domain([0,1])
+  .range(["white", "blue"])
+
 //init();
 
-async function init() {
-coviddata = await d3.csv("https://aberk104.github.io/us_states_cases_per_100k.csv")//, function(data) { console.log(data); });
 
-//data = ["Test 1","Test 2"]
-
-//d3.select("body").selectAll("p").data(coviddata).text(function(d,i) { return d; });
-
-//d3.select("body").data(coviddata).append("p").text(function(d) { return d.State + ", " + d.Date + ", " + d.MonthlyCasesPer100000People; });
-
-//d3.select("body").selectAll("p").data(coviddata).text(function(d) { return d; });
-
-}
 </script>
 </body>
 </html>
+
+
