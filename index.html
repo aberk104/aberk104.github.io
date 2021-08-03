@@ -94,7 +94,7 @@ if (error) throw error;
     var min = d3.min(uState.features, function(d) {return d.properties.Jul20; });
     var max = d3.max(uState.features, function(d) {return d.properties.Jul20; });
 
-    legenddata = [0,max]
+    legenddata = [0,max];
 
 	// Display US Map Choropleth Based on Monthly COVID-19 Cases per 100,000
     svg.selectAll('path')
