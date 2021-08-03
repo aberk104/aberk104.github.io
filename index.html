@@ -94,7 +94,7 @@ if (error) throw error;
     var min = d3.min(uState.features, function(d) {return d.properties.Jul20; });
     var max = d3.max(uState.features, function(d) {return d.properties.Jul20; });
 
-    var legenddata = [0,max];
+    var legenddata = [min,max];
 
 	// Display US Map Choropleth Based on Monthly COVID-19 Cases per 100,000
     svg.selectAll('path')
@@ -149,8 +149,9 @@ legend.append("rect")
     .attr("width", 18)
     //and 18px high
     .attr("height", 18)
+    .data(legenddata.reverse())
     //then fill it will the color assigned by the scale
-    .style("fill", myColor);
+    .style("fill", function(d,i) {return myColor(d); });
 legend.append("text")
     .attr("x", 24)
     .attr("y", 9)
