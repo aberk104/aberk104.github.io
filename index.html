@@ -55,6 +55,7 @@ var div = d3.select("body").append("div")
 const width = 900;
 const height = 600;
 const svg = d3.select("body").append("svg")
+    .attr("viewBox", "0 0 " + width + " " + height)
     .attr("width", width)
     .attr("height", height);
 
