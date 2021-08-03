@@ -149,14 +149,14 @@ legend.append("rect")
     .attr("width", 18)
     //and 18px high
     .attr("height", 18)
-    .data(legenddata.reverse())
+    .data(legenddata.slice().reverse())
     //then fill it will the color assigned by the scale
     .style("fill", function(d,i) {return myColor(d / max); });
 legend.append("text")
     .attr("x", 24)
     .attr("y", 9)
     .attr("dy", ".35em")
-    .data(legenddata.reverse())
+    .data(legenddata.slice().reverse())
     .text(function(d,i) { return d + " Cases per 100K"; });
     
 });
