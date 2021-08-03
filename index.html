@@ -156,7 +156,7 @@ legend.append("text")
     .attr("y", 9)
     .attr("dy", ".35em")
     .data(legenddata)
-    .text(data);
+    .text(function(d,i) { return i; });
     
 });
 
