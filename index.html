@@ -30,7 +30,7 @@ div.tooltip {
     position: absolute;
     text-align: center;
     width: 150px;
-    height: 40px;
+    height: 60px;
     padding: 2px;
     font: 12px sans-serif;
     background: lightgrey;
@@ -89,9 +89,9 @@ if (error) throw error;
     	div.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           div.html(d.properties.name + "<br>" + "FIPS ID: " + d.id + "<br>" + "Cases Per 100K: " + d.properties.Jun20)
+           div.html(d.properties.name + "<br>" + "FIPS ID: " + d.id + "<br>" + "Cases Per 100K: " + d.properties.Jun20 + "<br>" + "Max Rate: " + maxrate)
            .style("left", (d3.event.pageX) + "px")     
-           .style("top", (d3.event.pageY - 48) + "px")
+           .style("top", (d3.event.pageY - 60) + "px")
 	 ;})
 	 
     // fade out tooltip on mouse out               
