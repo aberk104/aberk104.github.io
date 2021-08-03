@@ -47,7 +47,7 @@ body {
 /* Legend Position Style */
 .legend {
 	position:absolute;
-	left:1200px;
+	left:0;
 	top:350px;
 }
     </style>
@@ -124,9 +124,9 @@ const legend = d3.select("body").append('svg')
 //add it with the '.legend' class
     .attr('class', 'legend')
     //it should be 14px wide
-    .attr('width', 148)
+    .attr('width', 50)
     //and 148px high
-    .attr('height', 148)
+    .attr('height', 50)
     //then either select all the 'g's inside the svg
     //or create placeholders
     .selectAll('g')
@@ -140,7 +140,7 @@ const legend = d3.select("body").append('svg')
     //Every node in teh data should have a 'g' appended
     .enter().append('g')
     //the 'g' should have this attribute
-    .attr("transform", function(d, i) { return "translate(250," + i * 20 + ")"; });
+    .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 //Inside every 'legend', insert a rect
 legend.append("rect")
     //that's 18px wide
