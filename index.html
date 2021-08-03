@@ -38,6 +38,18 @@ div.tooltip {
     border-radius: 8px;
     pointer-events: none;
 }
+
+/ Legend Font Style */
+body {
+	font: 11px sans-serif;
+}
+        
+/* Legend Position Style */
+.legend {
+	position:absolute;
+	left:800px;
+	top:350px;
+}
     </style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
@@ -47,8 +59,8 @@ div.tooltip {
 <p>This map shows the number of new COVID-19 cases each month for each state in the United States. In order to compare across states with different populations, I use a rate per 100,000 people. Animating the chart will show how the US hot spots have changed each month over the last 1.5 years.</p>
 
 <script>
-//Starting Point for US States JSON File is https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json//
-//coviddata = d3.json("/us_states2.json")
+
+
 
 var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
@@ -57,6 +69,8 @@ var div = d3.select("body").append("div")
 var myColor = d3.scaleLinear().domain([0,1])
   .range(["White", "#274E13"]);
 
+
+// The starting point for the code for creating the map of the United States comes from https://soshace.com/mapping-the-world-creating-beautiful-maps-and-populating-them-with-data-using-d3-js/
 const width = 900;
 const height = 600;
 const svg = d3.select("body").append("svg")
@@ -70,19 +84,8 @@ const projection = d3.geoAlbersUsa()
 
 const path = d3.geoPath().projection(projection);
 
-//d3.json("https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json", function(error, uState) {
-
-
-
-
-//var maxrates = [0.02,0.66,377.26,1155.79,649.41,831.48,1476.22,817.32,1287.26,2833.03,4535.65,2983.24,3282.49,1434.76,1286.02,1882.97,561.44,168.33]
-
-//var testrates = 
-
-//var max = d3.max(d3.json("/us_states2.json"), function(d, i) {return d.features.properties.Jun20; });
-//var max = d3.max(coviddata, function(d) {return +d.features.properties.Jun20; });
-
-d3.json("/us_states2.json", function(error, uState) {
+//Starting Point for US States JSON File is https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json//
+d3.json("/us_states.json", function(error, uState) {
 if (error) throw error;
 
     // Determine Max COVID-19 Rate for that Month
@@ -117,8 +120,6 @@ if (error) throw error;
 });
 
 
-
-//init();
 
 
 </script>
