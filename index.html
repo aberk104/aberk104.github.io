@@ -50,7 +50,7 @@ Monthly COVID-19 Cases Per 100,000 People by US State
 <script>
 //Starting Point for US States JSON File is https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json//
 async function init() {
-coviddata = await d3.json("/us_states2.json")}
+coviddata = await d3.json("/us_states2.json")
 
 var div = d3.select("body").append("div")	
     .attr("class", "tooltip")				
@@ -108,7 +108,7 @@ if (error) throw error;
 
 
 //init();
-
+}
 
 </script>
 </body>
