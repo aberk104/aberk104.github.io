@@ -76,7 +76,7 @@ const path = d3.geoPath().projection(projection);
 
 coviddata = d3.json("/us_states2.json")
 
-maxrate = d3.max(coviddata, function(d, i) {return d.Jun20; });
+maxrate = d3.max(coviddata, function(d, i) {return +d.Jun20; });
 
 d3.json("/us_states2.json", function(error, uState) {
 if (error) throw error;
@@ -86,12 +86,13 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", function(d, i) {return myColor(d.Jun20 / maxrate); })
+        .attr("fill", function(d, i) {return myColor(+d.Jun20 / maxrate); })
         .on("mouseover", function(d) {      
     	div.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           div.text(d.properties.name + " Cases Per 100K: " + d.properties.Jun20)
+           div.text(d.properties.name +
+	 " Cases Per 100K: " + d.properties.Jun20)
            .style("left", (d3.event.pageX) + "px")     
            .style("top", (d3.event.pageY - 48) + "px")
 	 ;})
