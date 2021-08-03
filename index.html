@@ -90,7 +90,7 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", function(d) {return myColor(d.properties.Jun20 / d3.select(maxrates.nodes()[6]); })
+        .attr("fill", function(d) {return myColor(d.properties.Jun20 / d3.select(maxrates.nodes()[6])); })
         .on("mouseover", function(d) {      
     	div.transition()        
       	   .duration(200)      
