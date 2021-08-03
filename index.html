@@ -54,7 +54,7 @@ body {
 
     #play-button {
       position: absolute;
-      top: 200px;
+      top: 150px;
       left: 250px;
       background: #f08080;
       padding-right: 26px;
@@ -119,76 +119,11 @@ body {
 </div>
 <script>
 
-/*var formatDateIntoYear = d3.timeFormat("%Y");
-var formatDate = d3.timeFormat("%b %Y");
-var parseDate = d3.timeParse("%m/%d/%y");
 
-var startDate = new Date("2020-01-01"),
-    endDate = new Date("2021-06-01");
-*/
 var sliderdates = ["Jan 2020","Feb 2020","Mar 2020","Apr 2020","May 2020","Jun 2020","Jul 2020","Aug 2020","Sep 2020","Oct 2020","Nov 2020","Dec 2020","Jan 2021","Feb 2021","Mar 2021","Apr 2021","May 2021","Jun 2021"]
 
-var slidermargin = {top:150, right:150, bottom:0, left:150},
-    sliderwidth = 960 - slidermargin.left - slidermargin.right,
-    sliderheight = 500 - slidermargin.top - slidermargin.bottom;
-
-/*var svgslider = d3.select("#vis")
-    .append("svgslider")
-    .attr("width", sliderwidth + slidermargin.left + slidermargin.right)
-    .attr("height", sliderheight + slidermargin.top + slidermargin.bottom);  
-*/
-////////// slider //////////
-/*
-var moving = false;
-var currentValue = 0;
-var targetValue = sliderwidth;
-*/
 var playButton = d3.select("#play-button");
-/*    
-var x = d3.scaleOrdinal(sliderdates);
 
-var slider = svgslider.append("g")
-    .attr("class", "slider")
-    .attr("transform", "translate(" + slidermargin.left + "," + sliderheight/5 + ")");
-
-slider.append("line")
-    .attr("class", "track")
-    .attr("x1", x.range()[0])
-    .attr("x2", x.range()[1])
-  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-    .attr("class", "track-inset")
-  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-    .attr("class", "track-overlay")
-    .call(d3.drag()
-        .on("start.interrupt", function() { slider.interrupt(); })
-        .on("start drag", function() {
-          currentValue = d3.event.x;
-          update(x.invert(currentValue)); 
-        })
-    );
-
-slider.insert("g", ".track-overlay")
-    .attr("class", "ticks")
-    .attr("transform", "translate(0," + 18 + ")")
-  .selectAll("text")
-    .data(x.ticks(10))
-    .enter()
-    .append("text")
-    .attr("x", x)
-    .attr("y", 10)
-    .attr("text-anchor", "middle")
-    .text(function(d) { return formatDateIntoYear(d); });
-
-var handle = slider.insert("circle", ".track-overlay")
-    .attr("class", "handle")
-    .attr("r", 9);
-
-var label = slider.append("text")  
-    .attr("class", "label")
-    .attr("text-anchor", "middle")
-    .text(formatDate(startDate))
-    .attr("transform", "translate(0," + (-25) + ")");
-*/
  
 // Starting point for the tooltip comes from http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
 var divt = d3.select("body").append("divt")	
