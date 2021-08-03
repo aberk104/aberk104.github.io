@@ -73,15 +73,15 @@ var myColor = d3.scaleLinear().domain([0,1])
 
 
 // The starting point for the code for creating the map of the United States comes from https://soshace.com/mapping-the-world-creating-beautiful-maps-and-populating-them-with-data-using-d3-js/
-const width = 900;
-const height = 600;
+const mapwidth = 900;
+const mapheight = 600;
 const svg = d3.select("body").append("svg")
-    .attr("viewBox", "0 0 " + width + " " + height)
-    .attr("width", width)
-    .attr("height", height);
+    .attr("viewBox", "0 0 " + mapwidth + " " + mapheight)
+    .attr("width", mapwidth)
+    .attr("height", mapheight);
 
 const projection = d3.geoAlbersUsa()
-    .translate([width / 2, height / 2]) // translate to center of screen
+    .translate([mapwidth / 2, mapheight / 2]) // translate to center of screen
     .scale([1000]); // scale things down so see entire US
 
 const path = d3.geoPath().projection(projection);
