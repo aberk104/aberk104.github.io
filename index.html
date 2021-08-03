@@ -74,7 +74,7 @@ const path = d3.geoPath().projection(projection);
 //Starting Point for US States JSON File is https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json//
 coviddata = d3.json("/us_states2.json")
 
-maxrate = d3.max(coviddata, function(d, i) {return +d.Jun20; });
+maxrate = d3.max(coviddata, function(d, i) {return d.properties.Jun20; });
 
 d3.json("/us_states2.json", function(error, uState) {
 if (error) throw error;
@@ -84,7 +84,7 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", function(d, i) {return myColor(i / 56); })
+        .attr("fill", function(d, i) {return myColor(d.properties.Jun20 / maxrate); })
         .on("mouseover", function(d) {      
     	div.transition()        
       	   .duration(200)      
