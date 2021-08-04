@@ -236,7 +236,9 @@ function updateFill(data, value) {
         .data(data)
         .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
     
+    if (currentValue <= targetValue) {
     setInterval(step(data), 1000);
+    }
     //timer = setInterval(step(data), 1000);
 }
 
