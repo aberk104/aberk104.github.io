@@ -139,7 +139,8 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", function(d) {return myColor(d.caserate[currentValue] / max); });
+        .attr("fill", "lightblue")
+        //.attr("fill", function(d) {return myColor(d.caserate[currentValue] / max); });
 
 	// Display Tooltip on Hover Over
         svg.selectAll('path')
@@ -168,6 +169,13 @@ if (error) throw error;
     currentValue = 0
     updateFill(uState.features, currentValue);
     button.text("Next");
+    } else if (button.text() == "Play") {
+    currentValue = 0
+    updateFill(uState.features, currentValue);
+    button.text("Next");    
+    
+    
+    
     } else {
 //    moving = true;
     //setInterval(step(uState.features), 1000);
