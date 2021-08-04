@@ -56,7 +56,7 @@ body {
 .legendTitle {
 	position:absolute;
 	right:20;
-	top:300px;
+	top:320px;
 	stroke:black;
 	font: 16px sans-serif;
 }
@@ -116,7 +116,7 @@ body {
 <script>
 
 
-var sliderdates = ["Jan 2020","Feb 2020","Mar 2020","Apr 2020","May 2020","Jun 2020","Jul 2020","Aug 2020","Sep 2020","Oct 2020","Nov 2020","Dec 2020","Jan 2021","Feb 2021","Mar 2021","Apr 2021","May 2021","Jun 2021"]
+var sliderdates = ["January 2020","February 2020","March 2020","April 2020","May 2020","June 2020","July 2020","August 2020","September 2020","October 2020","November 2020","December 2020","January 2021","February 2021","March 2021","April 2021","May 2021","June 2021"]
 
 var playButton = d3.select("#play-button");
 var moving = false;
@@ -203,10 +203,10 @@ var legendTitle = d3.select("body").append('svg')
                   .attr('class', 'legendTitle');
 
 legendTitle.append("text")
-    .attr("x", 24)
+    .attr("x", 20)
     .attr("y", 9)
     .attr("dy", ".35em")
-    .text("Jan 2020");
+    .text("January 2020");
     
 //create a new SVG in the body
 var legend = d3.select("body").append('svg')
@@ -252,7 +252,7 @@ legend.append("text")
     //moving = true;
     //clearInterval(timer);
     currentValue = 0
-    updateFill(uState.features, currentValue, legend);
+    updateFill(uState.features, currentValue, legend, legendtitle);
     button.text("Next");
     previousButton.style("visibility","hidden");
     } /*else if (button.text() == "Play") {
@@ -265,7 +265,7 @@ legend.append("text")
     }*/ else {
 //    moving = true;
     //setInterval(step(uState.features), 1000);
-    step(uState.features, legend);
+    step(uState.features, legend, legendtitle);
 //    button.text("Next");
     }
     })
@@ -276,7 +276,7 @@ legend.append("text")
     //moving = true;
     //clearInterval(timer);
     currentValue = 0
-    updateFill(uState.features, currentValue, legend);
+    updateFill(uState.features, currentValue, legend, legendtitle);
     backbutton.text("Next");
     } /*else if (button.text() == "Play") {
     currentValue = 0
@@ -288,17 +288,17 @@ legend.append("text")
     }*/ else {
 //    moving = true;
     //setInterval(step(uState.features), 1000);
-    backstep(uState.features, legend);
+    backstep(uState.features, legend, legendtitle);
 //    button.text("Next");
     }
     })
     
 });
 
-function step(data, legend) {
+function step(data, legend, legendtitle) {
   currentValue = currentValue + 1;
   playButton.text("Next");
-  updateFill(data, currentValue, legend);
+  updateFill(data, currentValue, legend, legendtitle);
   previousButton.text("Previous");
     if (currentValue >= targetValue) {
 //    moving = false;
@@ -314,13 +314,13 @@ function step(data, legend) {
   console.log(currentValue, targetValue);
 }
 
-function backstep(data, legend) {
+function backstep(data, legend, legendtitle) {
   currentValue = currentValue - 1;
   previousButton.text("Previous");
   if (currentValue < 17) {
   playButton.text("Next");
   }
-  updateFill(data, currentValue, legend);
+  updateFill(data, currentValue, legend, legendtitle);
     if (currentValue <= 0) {
 //    moving = false;
 //    currentValue = 0;
@@ -333,7 +333,7 @@ function backstep(data, legend) {
   console.log(currentValue, targetValue);
 }
 
-function updateFill(data, value, legend) {
+function updateFill(data, value, legend, legendtitle) {
     var max = d3.max(data, function(d) {return d.caserate[value]; });
     var min = d3.min(data, function(d) {return d.caserate[value]; });
 
@@ -347,6 +347,8 @@ function updateFill(data, value, legend) {
 
 //legend.remove("rect");
 //legend.remove("text");
+
+legendtitle.select("text").text(sliderdates[value]);
 
 legend.select("rect")
     //that's 18px wide
