@@ -139,7 +139,6 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .transition().duration(50)
         .attr("fill", function(d) {return myColor(d.caserate[currentValue] / max); });
 
 	// Display Tooltip on Hover Over
@@ -169,7 +168,7 @@ if (error) throw error;
     button.text("Play");
     } else {
     moving = true;
-    timer = setInterval(step, 1000);
+    timer = setInterval(step(uState.features), 1000);
     button.text("Pause");}
     })
     
@@ -216,7 +215,7 @@ legend.append("text")
     
 });
 
-function step() {
+function step(data) {
   currentValue = currentValue + 1;
   if (currentValue > targetValue) {
     moving = false;
@@ -225,7 +224,17 @@ function step() {
     // timer = 0;
     playButton.text("Play");
   }
+  updateFill(data, currentValue)
   console.log(currentValue)
+}
+
+function updateFill(data, value) {
+    var max = d3.max(data, function(d) {return d.caserate[value]; });
+
+
+    svg.selectAll('path')
+        .data(data)
+        .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
 }
 
 
