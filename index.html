@@ -141,7 +141,7 @@ if (error) throw error;
         .attr('class','state')
         .transition()
         .attr("fill", function(d) {return myColor(d.caserate[currentValue] / max); })
-
+/*
 	// Display Tooltip on Hover Over
         .on("mouseover", function(d) {      
     	divt.transition()        
@@ -158,7 +158,7 @@ if (error) throw error;
            .duration(200)      
            .style("opacity", 0);   
     });
-    
+*/    
     playButton.on("click", function() {
     var button = d3.select(this);
     if (button.text() == "Pause") {
