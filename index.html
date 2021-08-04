@@ -162,16 +162,17 @@ if (error) throw error;
     
     playButton.on("click", function() {
     var button = d3.select(this);
-//    if (button.text() == "Next") {
+    if (button.text() == "Restart") {
     //moving = true;
     //clearInterval(timer);
-//    button.text("Next");
-//    } else {
+    updateFill(uState.features, currentValue);
+    button.text("Next");
+    } else {
 //    moving = true;
     //setInterval(step(uState.features), 1000);
     step(uState.features);
 //    button.text("Next");
-    //}
+    }
     })
     
     
@@ -220,14 +221,15 @@ legend.append("text")
 function step(data) {
   currentValue = currentValue + 1;
   playButton.text("Next");
-  if (currentValue > targetValue) {
+  updateFill(data, currentValue);
+    if (currentValue >= targetValue) {
 //    moving = false;
     currentValue = 0;
     //clearInterval(timer);
     // timer = 0;
-    playButton.text("Play");
+    playButton.text("Restart");
   }
-  updateFill(data, currentValue);
+
   console.log(currentValue, targetValue);
 }
 
