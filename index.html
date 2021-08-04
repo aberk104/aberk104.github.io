@@ -257,7 +257,7 @@ function updateFill(data, value, legend) {
 //legend.remove("rect");
 //legend.remove("text");
 
-legend.selectAll("rect")
+legend.select("legend").selectAll("rect")
     //that's 18px wide
 //    .attr("width", 18)
     //and 18px high
@@ -265,7 +265,7 @@ legend.selectAll("rect")
     .data(legenddata.slice().reverse())
     //then fill it will the color assigned by the scale
     .style("fill", function(d,i) {return myColor(d / max); });
-legend.selectAll("text")
+legend.select("legend").selectAll("text")
 //    .attr("x", 24)
 //    .attr("y", 9)
 //    .attr("dy", ".35em")
