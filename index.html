@@ -126,7 +126,7 @@ var targetValue = 18
 var previousButton = d3.select("#previous-button");
 
 if (playButton.text() == "Play") {
-previousButton.style("visibility", "hidden");
+	previousButton.style("visibility", "hidden");
 }
 
  
@@ -158,11 +158,6 @@ const path = d3.geoPath().projection(projection);
 d3.json("/us_states.json", function(error, uState) {
 if (error) throw error;
 
-    // Determine Max COVID-19 Rate for that Month
-//    var min = d3.min(uState.features, function(d) {return d.caserate[currentValue]; });
-//    var max = d3.max(uState.features, function(d) {return d.caserate[currentValue]; });
-
-//    var legenddata = [min,max];
     min = d3.min(uState.features, function(d) {return d.caserate[currentValue]; });
     max = d3.max(uState.features, function(d) {return d.caserate[currentValue]; });
 
@@ -175,7 +170,6 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        //.attr("fill", "lightblue")
         .attr("fill", function(d) {return myColor(d.caserate[currentValue] / max); });
 
 	// Display Tooltip on Hover Over
@@ -210,35 +204,20 @@ legendTitle.append("text")
     
 //create a new SVG in the body
 var legend = d3.select("body").append('svg')
-//add it with the '.legend' class
     .attr('class', 'legend')
-    //it should be 14px wide
     .attr('width', 50)
-    //and 148px high
     .attr('height', 50)
-    //then either select all the 'g's inside the svg
-    //or create placeholders
     .selectAll('g')
-    //Fill the data into our placeholders in reverse order
-    //This arranges our legend in descending order.
-    //The 'data' here is the items we entered in the 'domain',
-    //in this case [min, max]
-    //We use 'slice()' to create a shallow copy of the array
-    //Since we don't want to modify the original one
     .data(myColor.domain().slice().reverse())
-    //Every node in teh data should have a 'g' appended
     .enter().append('g')
-    //the 'g' should have this attribute
     .attr("transform", function(d, i) { return "translate(0," + i * 30 + ")"; });
-//Inside every 'legend', insert a rect
+
 legend.append("rect")
-    //that's 18px wide
     .attr("width", 18)
-    //and 18px high
     .attr("height", 18)
     .data(legenddata.slice().reverse())
-    //then fill it will the color assigned by the scale
     .style("fill", function(d,i) {return myColor(d / max); });
+
 legend.append("text")
     .attr("x", 24)
     .attr("y", 9)
@@ -249,47 +228,23 @@ legend.append("text")
     playButton.on("click", function() {
     var button = d3.select(this);
     if (button.text() == "Restart") {
-    //moving = true;
-    //clearInterval(timer);
     currentValue = 0
     updateFill(uState.features, currentValue, legend, legendTitle);
     button.text("Next");
     previousButton.style("visibility","hidden");
-    } /*else if (button.text() == "Play") {
-    currentValue = 0
-    updateFill(uState.features, currentValue);
-    button.text("Next");    
-    
-    
-    
-    }*/ else {
-//    moving = true;
-    //setInterval(step(uState.features), 1000);
+    } else {
     step(uState.features, legend, legendTitle);
-//    button.text("Next");
     }
     })
 
     previousButton.on("click", function() {
     var backbutton = d3.select(this);
     if (backbutton.text() == "Restart") {
-    //moving = true;
-    //clearInterval(timer);
     currentValue = 0
     updateFill(uState.features, currentValue, legend, legendTitle);
     backbutton.text("Next");
-    } /*else if (button.text() == "Play") {
-    currentValue = 0
-    updateFill(uState.features, currentValue);
-    button.text("Next");    
-    
-    
-    
-    }*/ else {
-//    moving = true;
-    //setInterval(step(uState.features), 1000);
+    } else {
     backstep(uState.features, legend, legendTitle);
-//    button.text("Next");
     }
     })
     
@@ -301,10 +256,6 @@ function step(data, legend, legendtitle) {
   updateFill(data, currentValue, legend, legendtitle);
   previousButton.text("Previous");
     if (currentValue >= targetValue) {
-//    moving = false;
-//    currentValue = 0;
-    //clearInterval(timer);
-    // timer = 0;
     playButton.text("Restart");
   }
   if (currentValue > 0) {
@@ -318,17 +269,13 @@ function backstep(data, legend, legendtitle) {
   currentValue = currentValue - 1;
   previousButton.text("Previous");
   if (currentValue < targetValue) {
-  playButton.text("Next");
-  }
+	playButton.text("Next");
+     }
   updateFill(data, currentValue, legend, legendtitle);
     if (currentValue <= 0) {
-//    moving = false;
-//    currentValue = 0;
-    //clearInterval(timer);
-    // timer = 0;
-    previousButton.text("Previous");
-    previousButton.style("visibility", "hidden");
-  }
+	previousButton.text("Previous");
+	previousButton.style("visibility", "hidden");
+       }
 
   console.log(currentValue, targetValue);
 }
@@ -343,25 +290,13 @@ function updateFill(data, value, legend, legendtitle) {
         .data(data)
         .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
 
-//    svg.selectAll('path').
-
-//legend.remove("rect");
-//legend.remove("text");
-
 legendtitle.select("text").text(sliderdates[value]);
 
 legend.select("rect")
-    //that's 18px wide
-//    .attr("width", 18)
-    //and 18px high
-//    .attr("height", 18)
     .data(legenddata.slice().reverse())
-    //then fill it will the color assigned by the scale
     .style("fill", function(d,i) {return myColor(d / max); });
+
 legend.select("text")
-//    .attr("x", 24)
-//    .attr("y", 9)
-//    .attr("dy", ".35em")
     .data(legenddata.slice().reverse())
     .text(function(d,i) { return d + " Cases per 100K"; });
 
