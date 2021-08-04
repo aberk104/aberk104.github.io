@@ -91,7 +91,7 @@ var sliderdates = ["Jan 2020","Feb 2020","Mar 2020","Apr 2020","May 2020","Jun 2
 var playButton = d3.select("#play-button");
 var moving = false;
 var currentValue = 0
-var targetValue = 18
+var targetValue = 17
 
  
 // Starting point for the tooltip comes from http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
@@ -123,8 +123,8 @@ d3.json("/us_states.json", function(error, uState) {
 if (error) throw error;
 
     // Determine Max COVID-19 Rate for that Month
-    var min = d3.min(uState.features, function(d) {return d.caserate[0]; });
-    var max = d3.max(uState.features, function(d) {return d.caserate[0]; });
+    var min = d3.min(uState.features, function(d) {return d.caserate[currentValue]; });
+    var max = d3.max(uState.features, function(d) {return d.caserate[currentValue]; });
 
     var legenddata = [min,max];
 
@@ -135,14 +135,14 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", function(d) {return myColor(d.caserate[0] / max); })
+        .attr("fill", function(d) {return myColor(d.caserate[currentValue] / max); })
 
 	// Display Tooltip on Hover Over
         .on("mouseover", function(d) {      
     	divt.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           divt.html(d.properties.name + "<br>" + "Cases Per 100K: " + d.caserate[0])
+           divt.html(d.properties.name + "<br>" + "Cases Per 100K: " + d.caserate[currentValue])
            .style("left", (d3.event.pageX) + "px")     
            .style("top", (d3.event.pageY - 30) + "px")
 	 ;})
