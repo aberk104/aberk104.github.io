@@ -139,8 +139,8 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", "lightblue")
-        //.attr("fill", function(d) {return myColor(d.caserate[currentValue] / max); });
+        //.attr("fill", "lightblue")
+        .attr("fill", function(d) {return myColor(d.caserate[currentValue] / max); });
 
 	// Display Tooltip on Hover Over
         svg.selectAll('path')
@@ -169,14 +169,14 @@ if (error) throw error;
     currentValue = 0
     updateFill(uState.features, currentValue);
     button.text("Next");
-    } else if (button.text() == "Play") {
+    } /*else if (button.text() == "Play") {
     currentValue = 0
     updateFill(uState.features, currentValue);
     button.text("Next");    
     
     
     
-    } else {
+    }*/ else {
 //    moving = true;
     //setInterval(step(uState.features), 1000);
     step(uState.features);
@@ -210,7 +210,7 @@ const legend = d3.select("body").append('svg')
     //the 'g' should have this attribute
     .attr("transform", function(d, i) { return "translate(0," + i * 30 + ")"; });
 //Inside every 'legend', insert a rect
-legend.append("rect")
+/*legend.append("rect")
     //that's 18px wide
     .attr("width", 18)
     //and 18px high
@@ -224,7 +224,7 @@ legend.append("text")
     .attr("dy", ".35em")
     .data(legenddata.slice().reverse())
     .text(function(d,i) { return d + " Cases per 100K"; });
-    
+*/    
 });
 
 function step(data) {
@@ -251,6 +251,22 @@ function updateFill(data, value) {
     svg.selectAll('path')
         .data(data)
         .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
+
+legend.append("rect")
+    //that's 18px wide
+    .attr("width", 18)
+    //and 18px high
+    .attr("height", 18)
+    .data(legenddata.slice().reverse())
+    //then fill it will the color assigned by the scale
+    .style("fill", function(d,i) {return myColor(d / max); });
+legend.append("text")
+    .attr("x", 24)
+    .attr("y", 9)
+    .attr("dy", ".35em")
+    .data(legenddata.slice().reverse())
+    .text(function(d,i) { return d + " Cases per 100K"; });
+
     
 }
 
