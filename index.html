@@ -163,7 +163,7 @@ if (error) throw error;
     } else {
     moving = true;
     timer = setInterval(step, 200);
-    button.text(currentValue);}
+    button.text("Pause");}
     })
     
     
@@ -218,6 +218,7 @@ function step() {
     // timer = 0;
     playButton.text("Play");
   }
+  console.log(currentValue)
 }
 
 
