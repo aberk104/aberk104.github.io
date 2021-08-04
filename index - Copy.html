@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>D3 US Map</title>
+    <style>
+    body,
+svg {
+  height: 75%;
+  margin: auto;
+  width: 75%;
+
+}
+path {
+        stroke: black;
+        stroke-width: 0.5px;
+        
+    }
+    .state {
+  stroke-width: 1;
+  stroke: black;
+}
+
+.state:hover {
+  fill-opacity: .9;
+  cursor: pointer;
+}
+
+divt.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightgrey;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+/ Legend Font Style */
+body {
+	font: 11px sans-serif;
+}
+        
+/* Legend Position Style */
+.legend {
+	position:absolute;
+	right:20;
+	top:350px;
+	stroke:black
+}
+
+    #play-button {
+      position: absolute;
+      top: 150px;
+      left: 250px;
+      background: #f08080;
+      padding-right: 26px;
+      border-radius: 3px;
+      border: none;
+      color: white;
+      margin: 0;
+      padding: 0 12px;
+      width: 60px;
+      cursor: pointer;
+      height: 30px;
+    }
+
+    #play-button:hover {
+      background-color: #696969;
+    }    
+
+
+    </style>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+</head>
+<body>
+<h1 style="text-align:center;">Monthly COVID-19 Cases Per 100,000 People by US State</h1>
+<p>This map shows the number of new COVID-19 cases each month for each state in the United States. In order to compare across states with different populations, I use a rate per 100,000 people. Animating the chart will show how the US hot spots have changed each month over the last 1.5 years.</p>
+<div id="vis">
+  <button id="play-button">Play</button>
+</div>
+<script>
+
+
+var sliderdates = ["Jan 2020","Feb 2020","Mar 2020","Apr 2020","May 2020","Jun 2020","Jul 2020","Aug 2020","Sep 2020","Oct 2020","Nov 2020","Dec 2020","Jan 2021","Feb 2021","Mar 2021","Apr 2021","May 2021","Jun 2021"]
+
+var playButton = d3.select("#play-button");
+var moving = false;
+var currentValue = 0
+var targetValue = 17
+
+ 
+// Starting point for the tooltip comes from http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
+var divt = d3.select("body").append("divt")	
+    .attr("class", "tooltip")				
+    .style("opacity", 0);
+
+// Color variable in order to create a choropleth
+var myColor = d3.scaleLinear().domain([0,1])
+  .range(["White", "#274E13"]);
+
+
+// The starting point for the code for creating the map of the United States comes from https://soshace.com/mapping-the-world-creating-beautiful-maps-and-populating-them-with-data-using-d3-js/
+const mapwidth = 900;
+const mapheight = 600;
+const svg = d3.select("body").append("svg")
+    .attr("viewBox", "0 0 " + mapwidth + " " + mapheight)
+    .attr("width", mapwidth)
+    .attr("height", mapheight);
+
+const projection = d3.geoAlbersUsa()
+    .translate([mapwidth / 2, mapheight / 2]) // translate to center of screen
+    .scale([1000]); // scale things down so see entire US
+
+const path = d3.geoPath().projection(projection);
+
+//Starting Point for US States JSON File is https://gist.githubusercontent.com/Bradleykingz/3aa5206b6819a3c38b5d73cb814ed470/raw/a476b9098ba0244718b496697c5b350460d32f99/us-states.json//
+d3.json("/us_states.json", function(error, uState) {
+if (error) throw error;
+
+    // Determine Max COVID-19 Rate for that Month
+//    var min = d3.min(uState.features, function(d) {return d.caserate[currentValue]; });
+//    var max = d3.max(uState.features, function(d) {return d.caserate[currentValue]; });
+
+//    var legenddata = [min,max];
+    min = d3.min(uState.features, function(d) {return d.caserate[currentValue]; });
+    max = d3.max(uState.features, function(d) {return d.caserate[currentValue]; });
+
+    legenddata = [min,max];
+
+	// Display US Map Choropleth Based on Monthly COVID-19 Cases per 100,000
+    svg.selectAll('path')
+        .data(uState.features)
+        .enter()
+        .append('path')
+        .attr("d", path)
+        .attr('class','state')
+        .transition().duration(50)
+        .attr("fill", function(d) {return myColor(d.caserate[currentValue] / max); });
+
+	// Display Tooltip on Hover Over
+        svg.selectAll('path')
+        .data(uState.features)
+        .on("mouseover", function(d) {      
+    	divt.transition()        
+      	   .duration(200)      
+           .style("opacity", .9);      
+           divt.html(d.properties.name + "<br>" + "Cases Per 100K: " + d.caserate[currentValue])
+           .style("left", (d3.event.pageX) + "px")     
+           .style("top", (d3.event.pageY - 30) + "px")
+	 ;})
+	 
+	// Remove Tooltip on Mouse Out               
+       .on("mouseout", function(d) {       
+        divt.transition()        
+           .duration(200)      
+           .style("opacity", 0);   
+    });
+    
+    playButton.on("click", function() {
+    var button = d3.select(this);
+    if (button.text() == "Pause") {
+    moving = false;
+    clearInterval(timer);
+    button.text("Play");
+    } else {
+    moving = true;
+    timer = setInterval(step, 1000);
+    button.text("Pause");}
+    })
+    
+    
+    
+    
+//create a new SVG in the body
+const legend = d3.select("body").append('svg')
+//add it with the '.legend' class
+    .attr('class', 'legend')
+    //it should be 14px wide
+    .attr('width', 50)
+    //and 148px high
+    .attr('height', 50)
+    //then either select all the 'g's inside the svg
+    //or create placeholders
+    .selectAll('g')
+    //Fill the data into our placeholders in reverse order
+    //This arranges our legend in descending order.
+    //The 'data' here is the items we entered in the 'domain',
+    //in this case [min, max]
+    //We use 'slice()' to create a shallow copy of the array
+    //Since we don't want to modify the original one
+    .data(myColor.domain().slice().reverse())
+    //Every node in teh data should have a 'g' appended
+    .enter().append('g')
+    //the 'g' should have this attribute
+    .attr("transform", function(d, i) { return "translate(0," + i * 30 + ")"; });
+//Inside every 'legend', insert a rect
+legend.append("rect")
+    //that's 18px wide
+    .attr("width", 18)
+    //and 18px high
+    .attr("height", 18)
+    .data(legenddata.slice().reverse())
+    //then fill it will the color assigned by the scale
+    .style("fill", function(d,i) {return myColor(d / max); });
+legend.append("text")
+    .attr("x", 24)
+    .attr("y", 9)
+    .attr("dy", ".35em")
+    .data(legenddata.slice().reverse())
+    .text(function(d,i) { return d + " Cases per 100K"; });
+    
+});
+
+function step() {
+  currentValue = currentValue + 1;
+  if (currentValue > targetValue) {
+    moving = false;
+    currentValue = 0;
+    clearInterval(timer);
+    // timer = 0;
+    playButton.text("Play");
+  }
+  console.log(currentValue)
+}
+
+
+</script>
+</body>
+</html>
+
+
