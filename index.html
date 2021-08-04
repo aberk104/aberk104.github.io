@@ -116,6 +116,10 @@ var targetValue = 17
 
 var previousButton = d3.select("#previous-button");
 
+if (playButton.text() == "Play") {
+previousButton.style("visibility", "hidden");
+}
+
  
 // Starting point for the tooltip comes from http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
 var divt = d3.select("body").append("divt")	
@@ -296,6 +300,9 @@ function step(data, legend) {
 function backstep(data, legend) {
   currentValue = currentValue - 1;
   previousButton.text("Previous");
+  if (currentValue < 17) {
+  playButton.text("Next");
+  }
   updateFill(data, currentValue, legend);
     if (currentValue <= 0) {
 //    moving = false;
