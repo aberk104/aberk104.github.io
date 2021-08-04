@@ -72,6 +72,26 @@ body {
       background-color: #696969;
     }    
 
+    #previous-button {
+      position: absolute;
+      top: 150px;
+      left: 150px;
+      background: #f08080;
+      padding-right: 12px;
+      border-radius: 3px;
+      border: none;
+      color: white;
+      margin: 0;
+      padding: 0 12px;
+      width: 80px;
+      cursor: pointer;
+      height: 30px;
+    }
+
+    #previous-button:hover {
+      background-color: #696969;
+    }    
+
 
     </style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -92,6 +112,8 @@ var playButton = d3.select("#play-button");
 var moving = false;
 var currentValue = 0
 var targetValue = 17
+
+var previousButton = d3.select("#previous-button");
 
  
 // Starting point for the tooltip comes from http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
@@ -233,12 +255,29 @@ function step(data, legend) {
   currentValue = currentValue + 1;
   playButton.text("Next");
   updateFill(data, currentValue, legend);
+  previousButton.text("Previous");
     if (currentValue >= targetValue) {
 //    moving = false;
 //    currentValue = 0;
     //clearInterval(timer);
     // timer = 0;
     playButton.text("Restart");
+  }
+
+  console.log(currentValue, targetValue);
+}
+
+function backstep(data, legend) {
+  currentValue = currentValue - 1;
+  previousButton.text("Previous");
+  updateFill(data, currentValue, legend);
+    if (currentValue <= 0) {
+//    moving = false;
+//    currentValue = 0;
+    //clearInterval(timer);
+    // timer = 0;
+    previousButton.text("Previous");
+    previousButton.style("visibility", "hidden");
   }
 
   console.log(currentValue, targetValue);
