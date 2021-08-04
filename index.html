@@ -123,8 +123,8 @@ d3.json("/us_states.json", function(error, uState) {
 if (error) throw error;
 
     // Determine Max COVID-19 Rate for that Month
-    var min = d3.min(uState.features, function(d) {return d.caserate; });
-    var max = d3.max(uState.features, function(d) {return d.caserate; });
+    var min = d3.min(uState.features, function(d) {return d.caserate[10]; });
+    var max = d3.max(uState.features, function(d) {return d.caserate[10]; });
 
     var legenddata = [min,max];
 
@@ -135,14 +135,14 @@ if (error) throw error;
         .append('path')
         .attr("d", path)
         .attr('class','state')
-        .attr("fill", function(d) {return myColor(d.caserate / max); })
+        .attr("fill", function(d) {return myColor(d.caserate[10] / max); })
 
 	// Display Tooltip on Hover Over
         .on("mouseover", function(d) {      
     	divt.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           divt.html(d.properties.name + "<br>" + "Cases Per 100K: " + d.caserate)
+           divt.html(d.properties.name + "<br>" + "Cases Per 100K: " + d.caserate[10])
            .style("left", (d3.event.pageX) + "px")     
            .style("top", (d3.event.pageY - 30) + "px")
 	 ;})
