@@ -188,7 +188,7 @@ if (error) throw error;
     
     playButton.on("click", function() {
     var button = d3.select(this);
-    if (button.text() == "Pause" {
+    if (button.text() == "Pause") {
     moving = false;
     clearInterval(timer);
     button.text("Play");
