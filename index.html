@@ -52,10 +52,18 @@ body {
 	stroke:black
 }
 
+/* Legend Title Position Style */
+.legendTitle {
+	position:absolute;
+	right:20;
+	top:300px;
+	stroke:black
+}
+
     #play-button {
       position: absolute;
       top: 150px;
-      left: 250px;
+      left: 350px;
       background: #f08080;
       padding-right: 12px;
       border-radius: 3px;
@@ -75,7 +83,7 @@ body {
     #previous-button {
       position: absolute;
       top: 150px;
-      left: 150px;
+      left: 250px;
       background: #f08080;
       padding-right: 12px;
       border-radius: 3px;
@@ -190,7 +198,10 @@ if (error) throw error;
     
     
     
-    
+var legendTitle = d3.select("body").append('svg')
+                  .attr('class', 'legendTitle');
+
+legendTitle.append("text").text("Jan 2020");
     
 //create a new SVG in the body
 var legend = d3.select("body").append('svg')
@@ -326,6 +337,8 @@ function updateFill(data, value, legend) {
     svg.selectAll('path')
         .data(data)
         .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
+
+//    svg.selectAll('path').
 
 //legend.remove("rect");
 //legend.remove("text");
