@@ -254,6 +254,9 @@ function updateFill(data, value, legend) {
         .data(data)
         .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
 
+legend.remove("rect");
+legend.remove("text");
+
 legend.append("rect")
     //that's 18px wide
     .attr("width", 18)
