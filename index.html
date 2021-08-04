@@ -170,7 +170,7 @@ if (error) throw error;
 //    moving = true;
     //setInterval(step(uState.features), 1000);
     step(uState.features);
-    button.text("Next");
+//    button.text("Next");
     //}
     })
     
@@ -219,8 +219,9 @@ legend.append("text")
 
 function step(data) {
   currentValue = currentValue + 1;
+  playButton.text("Next");
   if (currentValue > targetValue) {
-    moving = false;
+//    moving = false;
     currentValue = 0;
     //clearInterval(timer);
     // timer = 0;
