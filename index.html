@@ -124,6 +124,8 @@ var sliderdates = ["Jan 2020","Feb 2020","Mar 2020","Apr 2020","May 2020","Jun 2
 
 var playButton = d3.select("#play-button");
 var moving = false;
+var currentvalue = 0
+var targetvalue = 18
 
  
 // Starting point for the tooltip comes from http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
@@ -241,7 +243,16 @@ legend.append("text")
     
 });
 
-
+function step() {
+  currentValue = currentValue + 1;
+  if (currentValue > targetValue) {
+    moving = false;
+    currentValue = 0;
+    clearInterval(timer);
+    // timer = 0;
+    playButton.text("Play");
+  }
+}
 
 
 </script>
