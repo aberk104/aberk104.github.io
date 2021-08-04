@@ -164,7 +164,7 @@ if (error) throw error;
     var button = d3.select(this);
     if (button.text() == "Pause") {
     moving = false;
-    clearInterval(timer);
+    //clearInterval(timer);
     button.text("Play");
     } else {
     moving = true;
@@ -236,6 +236,7 @@ function updateFill(data, value) {
         .data(data)
         .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
     
+    setInterval(step(data), 1000);
     //timer = setInterval(step(data), 1000);
 }
 
