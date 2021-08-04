@@ -317,7 +317,7 @@ function step(data, legend, legendtitle) {
 function backstep(data, legend, legendtitle) {
   currentValue = currentValue - 1;
   previousButton.text("Previous");
-  if (currentValue < 17) {
+  if (currentValue < targetValue) {
   playButton.text("Next");
   }
   updateFill(data, currentValue, legend, legendtitle);
