@@ -168,7 +168,7 @@ if (error) throw error;
     button.text("Play");
     } else {
     moving = true;
-    timer = setInterval(step(uState.features), 100);
+    setInterval(step(uState.features), 1000);
     button.text("Pause");}
     })
     
@@ -220,12 +220,12 @@ function step(data) {
   if (currentValue > targetValue) {
     moving = false;
     currentValue = 0;
-    clearInterval(timer);
+    //clearInterval(timer);
     // timer = 0;
     playButton.text("Play");
   }
   updateFill(data, currentValue);
-  console.log(currentValue);
+  console.log(currentValue, targetValue);
 }
 
 function updateFill(data, value) {
@@ -236,7 +236,7 @@ function updateFill(data, value) {
         .data(data)
         .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
     
-    timer = setInterval(step(data), 100);
+    //timer = setInterval(step(data), 1000);
 }
 
 
