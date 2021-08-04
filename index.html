@@ -166,7 +166,7 @@ if (error) throw error;
     
     
 //create a new SVG in the body
-const legend = d3.select("body").append('svg')
+var legend = d3.select("body").append('svg')
 //add it with the '.legend' class
     .attr('class', 'legend')
     //it should be 14px wide
@@ -209,7 +209,7 @@ legend.append("text")
     //moving = true;
     //clearInterval(timer);
     currentValue = 0
-    updateFill(uState.features, currentValue);
+    updateFill(uState.features, currentValue, legend);
     button.text("Next");
     } /*else if (button.text() == "Play") {
     currentValue = 0
@@ -221,7 +221,7 @@ legend.append("text")
     }*/ else {
 //    moving = true;
     //setInterval(step(uState.features), 1000);
-    step(uState.features);
+    step(uState.features, legend);
 //    button.text("Next");
     }
     })
@@ -229,10 +229,10 @@ legend.append("text")
     
 });
 
-function step(data) {
+function step(data, legend) {
   currentValue = currentValue + 1;
   playButton.text("Next");
-  updateFill(data, currentValue);
+  updateFill(data, currentValue, legend);
     if (currentValue >= targetValue) {
 //    moving = false;
 //    currentValue = 0;
@@ -244,7 +244,7 @@ function step(data) {
   console.log(currentValue, targetValue);
 }
 
-function updateFill(data, value) {
+function updateFill(data, value, legend) {
     var max = d3.max(data, function(d) {return d.caserate[value]; });
     var min = d3.min(data, function(d) {return d.caserate[value]; });
 
