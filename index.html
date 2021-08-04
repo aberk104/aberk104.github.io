@@ -108,7 +108,7 @@ body {
 </head>
 <body>
 <h1 style="text-align:center;">Monthly COVID-19 Cases Per 100,000 People by US State</h1>
-<p>This map shows the number of new COVID-19 cases each month for each state in the United States from January 2020 through June 12, 2021. In order to compare across states with different populations, I use a rate per 100,000 people. Animating the chart will show how the US hot spots have changed each month over the last 1.5 years.</p>
+<p>This map shows the number of new COVID-19 cases each month for each state in the United States from January 2020 through July 2021. In order to compare across states with different populations, I use a rate per 100,000 people. Animating the chart will show how the US hot spots have changed each month over the last 1.5 years.</p>
 <div id="vis">
   <button id="play-button">Play</button>
   <button id="previous-button">Previous</button>
@@ -116,12 +116,12 @@ body {
 <script>
 
 
-var sliderdates = ["January 2020","February 2020","March 2020","April 2020","May 2020","June 2020","July 2020","August 2020","September 2020","October 2020","November 2020","December 2020","January 2021","February 2021","March 2021","April 2021","May 2021","June 2021"]
+var sliderdates = ["January 2020","February 2020","March 2020","April 2020","May 2020","June 2020","July 2020","August 2020","September 2020","October 2020","November 2020","December 2020","January 2021","February 2021","March 2021","April 2021","May 2021","June 2021","July 2021"]
 
 var playButton = d3.select("#play-button");
 var moving = false;
 var currentValue = 0
-var targetValue = 17
+var targetValue = 18
 
 var previousButton = d3.select("#previous-button");
 
