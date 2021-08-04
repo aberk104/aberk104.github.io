@@ -161,28 +161,6 @@ if (error) throw error;
            .style("opacity", 0);   
     });
     
-    playButton.on("click", function() {
-    var button = d3.select(this);
-    if (button.text() == "Restart") {
-    //moving = true;
-    //clearInterval(timer);
-    currentValue = 0
-    updateFill(uState.features, currentValue);
-    button.text("Next");
-    } /*else if (button.text() == "Play") {
-    currentValue = 0
-    updateFill(uState.features, currentValue);
-    button.text("Next");    
-    
-    
-    
-    }*/ else {
-//    moving = true;
-    //setInterval(step(uState.features), 1000);
-    step(uState.features);
-//    button.text("Next");
-    }
-    })
     
     
     
@@ -210,7 +188,7 @@ const legend = d3.select("body").append('svg')
     //the 'g' should have this attribute
     .attr("transform", function(d, i) { return "translate(0," + i * 30 + ")"; });
 //Inside every 'legend', insert a rect
-/*legend.append("rect")
+legend.append("rect")
     //that's 18px wide
     .attr("width", 18)
     //and 18px high
@@ -224,7 +202,31 @@ legend.append("text")
     .attr("dy", ".35em")
     .data(legenddata.slice().reverse())
     .text(function(d,i) { return d + " Cases per 100K"; });
-*/    
+
+    playButton.on("click", function() {
+    var button = d3.select(this);
+    if (button.text() == "Restart") {
+    //moving = true;
+    //clearInterval(timer);
+    currentValue = 0
+    updateFill(uState.features, currentValue);
+    button.text("Next");
+    } /*else if (button.text() == "Play") {
+    currentValue = 0
+    updateFill(uState.features, currentValue);
+    button.text("Next");    
+    
+    
+    
+    }*/ else {
+//    moving = true;
+    //setInterval(step(uState.features), 1000);
+    step(uState.features);
+//    button.text("Next");
+    }
+    })
+
+    
 });
 
 function step(data) {
