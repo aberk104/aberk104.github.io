@@ -123,10 +123,14 @@ d3.json("/us_states.json", function(error, uState) {
 if (error) throw error;
 
     // Determine Max COVID-19 Rate for that Month
-    var min = d3.min(uState.features, function(d) {return d.caserate[currentValue]; });
-    var max = d3.max(uState.features, function(d) {return d.caserate[currentValue]; });
+//    var min = d3.min(uState.features, function(d) {return d.caserate[currentValue]; });
+//    var max = d3.max(uState.features, function(d) {return d.caserate[currentValue]; });
 
-    var legenddata = [min,max];
+//    var legenddata = [min,max];
+    min = d3.min(uState.features, function(d) {return d.caserate[currentValue]; });
+    max = d3.max(uState.features, function(d) {return d.caserate[currentValue]; });
+
+    legenddata = [min,max];
 
 	// Display US Map Choropleth Based on Monthly COVID-19 Cases per 100,000
     svg.selectAll('path')
