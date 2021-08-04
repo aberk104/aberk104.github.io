@@ -123,6 +123,7 @@ body {
 var sliderdates = ["Jan 2020","Feb 2020","Mar 2020","Apr 2020","May 2020","Jun 2020","Jul 2020","Aug 2020","Sep 2020","Oct 2020","Nov 2020","Dec 2020","Jan 2021","Feb 2021","Mar 2021","Apr 2021","May 2021","Jun 2021"]
 
 var playButton = d3.select("#play-button");
+var moving = false;
 
  
 // Starting point for the tooltip comes from http://bl.ocks.org/michellechandra/0b2ce4923dc9b5809922
@@ -184,6 +185,22 @@ if (error) throw error;
            .duration(200)      
            .style("opacity", 0);   
     });
+    
+    playButton.on("click", function() {
+    var button = d3.select(this);
+    if (button.text() == "Pause" {
+    moving = false;
+    clearInterval(timer);
+    button.text("Play");
+    } else {
+    moving = true;
+    timer = setInterval(step, 200);
+    button.text("Pause");}
+    })
+    
+    
+    
+    
 //create a new SVG in the body
 const legend = d3.select("body").append('svg')
 //add it with the '.legend' class
