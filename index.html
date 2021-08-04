@@ -30,7 +30,7 @@ divt.tooltip {
     position: absolute;
     text-align: center;
     width: 150px;
-    height: 60px;
+    height: 24px;
     padding: 2px;
     font: 12px sans-serif;
     background: lightgrey;
@@ -71,41 +71,7 @@ body {
     #play-button:hover {
       background-color: #696969;
     }    
-    
-    .ticks {
-      font-size: 10px;
-    }
 
-    .track,
-    .track-inset,
-    .track-overlay {
-      stroke-linecap: round;
-    }
-
-    .track {
-      stroke: #000;
-      stroke-opacity: 0.3;
-      stroke-width: 10px;
-    }
-
-    .track-inset {
-      stroke: #dcdcdc;
-      stroke-width: 8px;
-    }
-
-    .track-overlay {
-      pointer-events: stroke;
-      stroke-width: 50px;
-      stroke: transparent;
-      cursor: crosshair;
-    }
-
-    .handle {
-      fill: #fff;
-      stroke: #000;
-      stroke-opacity: 0.5;
-      stroke-width: 1.25px;
-    }
 
     </style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -178,7 +144,7 @@ if (error) throw error;
            .style("opacity", .9);      
            divt.html(d.properties.name + "<br>" + "Cases Per 100K: " + d.caserate.Nov20)
            .style("left", (d3.event.pageX) + "px")     
-           .style("top", (d3.event.pageY - 60) + "px")
+           .style("top", (d3.event.pageY - 24) + "px")
 	 ;})
 	 
 	// Remove Tooltip on Mouse Out               
