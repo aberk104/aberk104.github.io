@@ -249,13 +249,13 @@ legend.append("text")
     })
 
     previousButton.on("click", function() {
-    var button = d3.select(this);
-    if (button.text() == "Restart") {
+    var backbutton = d3.select(this);
+    if (backbutton.text() == "Restart") {
     //moving = true;
     //clearInterval(timer);
     currentValue = 0
     updateFill(uState.features, currentValue, legend);
-    button.text("Next");
+    backbutton.text("Next");
     } /*else if (button.text() == "Play") {
     currentValue = 0
     updateFill(uState.features, currentValue);
@@ -285,6 +285,9 @@ function step(data, legend) {
     // timer = 0;
     playButton.text("Restart");
   }
+  if (currentValue > 0) {
+  previousButton.text("Previous");
+  previousButton.style("visibility","visible");
 
   console.log(currentValue, targetValue);
 }
