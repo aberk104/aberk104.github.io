@@ -162,14 +162,16 @@ if (error) throw error;
     
     playButton.on("click", function() {
     var button = d3.select(this);
-    if (button.text() == "Pause") {
-    moving = false;
+//    if (button.text() == "Next") {
+    //moving = true;
     //clearInterval(timer);
-    button.text("Play");
-    } else {
-    moving = true;
-    setInterval(step(uState.features), 1000);
-    button.text("Pause");}
+//    button.text("Next");
+//    } else {
+//    moving = true;
+    //setInterval(step(uState.features), 1000);
+    step(uState.features);
+    button.text("Next");
+    //}
     })
     
     
@@ -230,16 +232,14 @@ function step(data) {
 
 function updateFill(data, value) {
     var max = d3.max(data, function(d) {return d.caserate[value]; });
+    var min = d3.min(data, function(d) {return d.caserate[value]; });
 
+    var legenddata = [min,max];
 
     svg.selectAll('path')
         .data(data)
         .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
     
-    if (value <= targetValue) {
-    setInterval(step(data), 1000);
-    }
-    //timer = setInterval(step(data), 1000);
 }
 
 
