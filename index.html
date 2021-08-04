@@ -165,6 +165,7 @@ if (error) throw error;
     if (button.text() == "Restart") {
     //moving = true;
     //clearInterval(timer);
+    currentValue = 0
     updateFill(uState.features, currentValue);
     button.text("Next");
     } else {
@@ -224,7 +225,7 @@ function step(data) {
   updateFill(data, currentValue);
     if (currentValue >= targetValue) {
 //    moving = false;
-    currentValue = 0;
+//    currentValue = 0;
     //clearInterval(timer);
     // timer = 0;
     playButton.text("Restart");
