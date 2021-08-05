@@ -314,7 +314,7 @@ legend.select("text")
     .data(legenddata.slice().reverse())
     .text(function(d,i) { return d + " Cases per 100K"; });
 
-      const annotations = [
+      const annotations2 = [
 /*        {
           note: {
             label: "Basic settings with subject position(x,y) and a note offset(dx, dy)",
@@ -373,21 +373,7 @@ legend.select("text")
           dx: -100
         }].map(function(d){ d.color = "#E8336D"; return d})
 
-        const makeAnnotations = d3.annotation()
-          .type(d3.annotationCalloutCircle)
-          .annotations(annotations);
-
-
-if (value == 2) {
-//d3.select("svg").selectAll("annotations").remove();
-//} else {
-        d3.select("svg")
-          .append("g")
-          .attr("class", "annotation-group")
-          .annotation()
-	.annotations([{
-          //below in makeAnnotations has type set to d3.annotationLabel
-          //you can add this type value below to override that default
+      const annotations2 = [
           type: d3.annotationCalloutCircle,
           note: {
             label: "New York & New Jersey were the epicenter of the COVID-19 pandemic",
@@ -402,7 +388,21 @@ if (value == 2) {
           y: 225,
           dy: -100,
           dx: -100
-        }]);
+        }]
+
+        const makeAnnotations = d3.annotation()
+          .type(d3.annotationCalloutCircle)
+          .annotations(annotations2);
+
+
+if (value == 2) {
+//d3.select("svg").selectAll("annotations").remove();
+//} else {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations)
+;
 } else {
 d3.selectAll("g.annotations").remove();
 }
