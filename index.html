@@ -202,8 +202,7 @@ if (error) throw error;
            .duration(200)      
            .style("opacity", 0);   
     })
-    .on("click", function() {
-    console.log(d3.event.pageX, d3.event.pageY); });
+;
     
     
     
@@ -282,7 +281,6 @@ function step(data, legend, legendtitle) {
   previousButton.text("Previous");
   previousButton.style("visibility","visible");
 }
-  console.log(currentValue, targetValue);
 }
 
 function backstep(data, legend, legendtitle) {
@@ -296,8 +294,6 @@ function backstep(data, legend, legendtitle) {
 	previousButton.text("Previous");
 	previousButton.style("visibility", "hidden");
        }
-
-  console.log(currentValue, targetValue);
 }
 
 function updateFill(data, value, legend, legendtitle) {
