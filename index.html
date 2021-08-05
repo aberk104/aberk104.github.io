@@ -103,7 +103,7 @@ body {
 
 .annotation-note-label, .annotation-note-title {
       stroke: black;
-      font: 20px sans-serif;
+      font: 16px sans-serif;
     }
 
     </style>
@@ -395,17 +395,14 @@ legend.select("text")
           .type(d3.annotationCalloutCircle)
           .annotations(annotations2);
 
+d3.selectAll("g.annotations").remove();
 
-if (value == 2) {
-//d3.select("svg").selectAll("annotations").remove();
-//} else {
+if (value == 2) or (value == 3) {
         d3.select("svg")
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations)
 ;
-} else {
-d3.selectAll("g.annotations").remove();
 }
 
 
