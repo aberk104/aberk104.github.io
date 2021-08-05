@@ -397,9 +397,32 @@ legend.select("text")
           dx: -80
         }]
 
-        const makeAnnotations = d3.annotation()
+      const annotations3 = [{
+          type: d3.annotationCalloutRect,
+          note: {
+            label: "The southern US becomes the epicenter. First Arizona in June 2020 followed by Florida, Louisiana, Mississippi, Alabama, and Georgia.",
+            title: "June - August 2020",
+            wrap: 190
+          },
+          //settings for the subject, in this case the circle radius
+          subject: {
+            width: 500,
+	  height: 100
+          },
+          x: 315,
+          y: 700,
+          dy: -80,
+          dx: -80
+        }]
+
+
+        const makeAnnotations2 = d3.annotation()
           .type(d3.annotationCalloutCircle)
           .annotations(annotations2);
+
+        const makeAnnotations3 = d3.annotation()
+          .type(d3.annotationCalloutRect)
+          .annotations(annotations3);
 
 d3.selectAll("g.annotations").remove();
 
@@ -407,13 +430,31 @@ if (value == 2) {
         d3.select("svg")
           .append("g")
           .attr("class", "annotation-group")
-          .call(makeAnnotations)
+          .call(makeAnnotations2)
 ;
 } else if (value == 3) {
         d3.select("svg")
           .append("g")
           .attr("class", "annotation-group")
-          .call(makeAnnotations)
+          .call(makeAnnotations2)
+;
+}  else if (value == 5) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations3)
+;
+} else if (value == 6) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations3)
+;
+} else if (value == 7) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations3)
 ;
 }
 
