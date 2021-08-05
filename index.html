@@ -378,12 +378,12 @@ legend.select("text")
           y: 225,
           dy: -100,
           dx: -100
-        }].map(function(d){ d.color = "#E8336D"; return d})
+        }].map(function(d){ d.color = "#E8336D"; return d});
 
       const annotations2 = [{
           note: {
             label: "New York & New Jersey were the epicenter of the COVID-19 pandemic",
-            title: "March - April 2020",
+            title: "Mar - Apr 2020",
             wrap: 200
           },
           //settings for the subject, in this case the circle radius
@@ -394,12 +394,12 @@ legend.select("text")
           y: 200,
           dy: -80,
           dx: -80
-        }]
+        }];
 
       const annotations3 = [{
           note: {
             label: "The southern US becomes the epicenter. First Arizona in June 2020 followed by Florida, Louisiana, Mississippi, Alabama, and Georgia.",
-            title: "June - August 2020",
+            title: "June - Aug 2020",
             wrap: 200
           },
           //settings for the subject, in this case the circle radius
@@ -410,12 +410,12 @@ legend.select("text")
           y: 350,
           dy: -200,
           dx: 450
-        }]
+        }];
 
       const annotations4 = [{
           note: {
             label: "The southern US becomes the epicenter. First Arizona in June 2020 followed by Florida, Louisiana, Mississippi, Alabama, and Georgia.",
-            title: "June - August 2020",
+            title: "June - Aug 2020",
             wrap: 200
           },
           //settings for the subject, in this case the circle radius
@@ -425,14 +425,14 @@ legend.select("text")
           x: 650,
           y: 400,
           dy: -250,
-          dx: 0
-        }]
+          dx: 25
+        }];
 
 
       const annotations5 = [{
           note: {
             label: "The northern US, especially North Dakota, becomes the new epicenter with some of the highest case rates per 100K over the entire time period.",
-            title: "September - November 2020",
+            title: "Sept - Nov 2020",
             wrap: 200
           },
           //settings for the subject, in this case the circle radius
@@ -441,9 +441,32 @@ legend.select("text")
           },
           x: 375,
           y: 175,
-          dy: 0,
-          dx: 150
-        }]
+          dy: -50,
+          dx: 200
+        }];
+        
+        
+      const annotations6 = [{
+          note: {
+            label: "Arizona once again has the highest case rate, even higher than in June 2020.",
+            title: "Jan 2021",
+            wrap: 200
+          },
+          //settings for the subject, in this case the circle radius
+          connector: {
+            end: "arrow" // 'dot' also available
+          },
+          x: 225,
+          y: 350,
+          dy: -200,
+          dx: 450
+        }];
+
+        
+        
+        
+        
+        
         const makeAnnotations2 = d3.annotation()
           .type(d3.annotationLabel)
           .annotations(annotations2);
@@ -459,7 +482,10 @@ legend.select("text")
         const makeAnnotations5 = d3.annotation()
           .type(d3.annotationLabel)
           .annotations(annotations5);
-	
+
+        const makeAnnotations6 = d3.annotation()
+          .type(d3.annotationLabel)
+          .annotations(annotations6);	
 	
 d3.selectAll("g.annotations").remove();
 
@@ -510,6 +536,12 @@ if (value == 2) {
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations5)
+;
+} else if (value == 12) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations6)
 ;
 }
 
