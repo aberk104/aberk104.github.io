@@ -117,6 +117,8 @@ body {
 <script>
 
 
+var numberformat = d3.format(',');
+
 var sliderdates = ["January 2020","February 2020","March 2020","April 2020","May 2020","June 2020","July 2020","August 2020","September 2020","October 2020","November 2020","December 2020","January 2021","February 2021","March 2021","April 2021","May 2021","June 2021","July 2021"]
 
 var playButton = d3.select("#play-button");
@@ -180,7 +182,7 @@ if (error) throw error;
     	divt.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           divt.html(d.properties.name + "<br>" + "Population: " + d.properties.population + "<br>" + "Cases Per 100K: " + d.caserate[currentValue] + "<br>" + "Total Monthly Cases: " + d.monthlycases[currentValue])
+           divt.html(d.properties.name + "<br>" + "Population: " + numberformat(d.properties.population) + "<br>" + "Cases Per 100K: " + d.caserate[currentValue] + "<br>" + "Total Monthly Cases: " + d.monthlycases[currentValue])
            .style("left", (d3.event.pageX) + "px")     
            .style("top", (d3.event.pageY - 30) + "px")
 	 ;})
