@@ -195,7 +195,9 @@ if (error) throw error;
         divt.transition()        
            .duration(200)      
            .style("opacity", 0);   
-    });
+    })
+    .on("click", function() {
+    console.log(d3.event.pageX, d3.event.pageY); });
     
     
     
