@@ -48,7 +48,7 @@ body {
 .legend {
 	position:absolute;
 	right:20;
-	top:550px;
+	top:450px;
 	stroke:black;
 }
 
@@ -56,7 +56,7 @@ body {
 .legendTitle {
 	position:absolute;
 	right:20;
-	top:520px;
+	top:420px;
 	stroke:black;
 	font: 16px sans-serif;
 }
@@ -184,7 +184,7 @@ if (error) throw error;
            .style("opacity", .9);      
            divt.html(d.properties.name + "<br>" + "Population: " + numberformat(d.properties.population) + "<br>" + "<br>" + "Cases Per 100K: " + d.caserate[currentValue] + "<br>" + "Total Monthly Cases: " + numberformat(d.monthlycases[currentValue]) + "<br>" + "Total Cases To Date: " + numberformat(d.cumulativecases[currentValue]))
            .style("left", (d3.event.pageX - 180) + "px")     
-           .style("top", (d3.event.pageY - 10) + "px")
+           .style("top", (d3.event.pageY) + "px")
 	 ;})
 	 
 	// Remove Tooltip on Mouse Out               
