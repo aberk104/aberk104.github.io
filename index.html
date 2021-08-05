@@ -312,7 +312,6 @@ legend.select("text")
     .data(legenddata.slice().reverse())
     .text(function(d,i) { return d + " Cases per 100K"; });
 
-
       const annotations = [
         {
           note: {
@@ -374,13 +373,17 @@ legend.select("text")
 
         const makeAnnotations = d3.annotation()
           .type(d3.annotationLabel)
-          .annotations(annotations)
+          .annotations(annotations);
 
+
+if (value == 6) {
+d3.selectAll("annotation-group").remove();
+} else {
         d3.select("svg")
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations)
-
+}
 
 
 
