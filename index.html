@@ -320,72 +320,12 @@ legend.select("text")
     .data(legenddata.slice().reverse())
     .text(function(d,i) { return d + " Cases per 100K"; });
 
-      const annotations = [
-/*        {
-          note: {
-            label: "Basic settings with subject position(x,y) and a note offset(dx, dy)",
-            title: "d3.annotationLabel"
-          },
-          x: 50,
-          y: 150,
-          dy: 137,
-          dx: 162
-        },{
-          note: {
-            label: "Added connector end 'arrow', note wrap '180', and note align 'left'",
-            title: "d3.annotationLabel",
-            wrap: 150,
-            align: "left"
-          },
-          connector: {
-            end: "arrow" // 'dot' also available
-          },
-          x: 170,
-          y: 150,
-          dy: 137,
-          dx: 162
-        },{
-          note: {
-            label: "Changed connector type to 'curve'",
-            title: "d3.annotationLabel",
-            wrap: 150
-          },
-          connector: {
-            end: "dot",
-            type: "curve",
-            //can also add a curve type, e.g. curve: d3.curveStep
-            points: [[100, 14],[190, 52]]
-          },
-          x: 350,
-          y: 150,
-          dy: 137,
-          dx: 262
-        },*/{
-          //below in makeAnnotations has type set to d3.annotationLabel
-          //you can add this type value below to override that default
-          type: d3.annotationCalloutCircle,
-          note: {
-            label: "New York & New Jersey were the epicenter of the COVID-19 pandemic",
-            title: "March - April 2020",
-            wrap: 190
-          },
-          //settings for the subject, in this case the circle radius
-          subject: {
-            radius: 50
-          },
-          x: 736,
-          y: 225,
-          dy: -100,
-          dx: -100
-        }].map(function(d){ d.color = "#E8336D"; return d});
-
       const annotations2 = [{
           note: {
             label: "New York & New Jersey are the epicenter of the COVID-19 pandemic",
             title: "Mar - Apr 2020",
             wrap: 200
           },
-          //settings for the subject, in this case the circle radius
           connector: {
             end: "arrow" // 'dot' also available
           },
@@ -401,7 +341,6 @@ legend.select("text")
             title: "June - Aug 2020",
             wrap: 200
           },
-          //settings for the subject, in this case the circle radius
           connector: {
             end: "arrow" // 'dot' also available
           },
@@ -417,7 +356,6 @@ legend.select("text")
             title: "June - Aug 2020",
             wrap: 200
           },
-          //settings for the subject, in this case the circle radius
           connector: {
             end: "arrow" // 'dot' also available
           },
@@ -434,7 +372,6 @@ legend.select("text")
             title: "Sept - Nov 2020",
             wrap: 200
           },
-          //settings for the subject, in this case the circle radius
           connector: {
             end: "arrow" // 'dot' also available
           },
@@ -451,7 +388,6 @@ legend.select("text")
             title: "Jan 2021",
             wrap: 200
           },
-          //settings for the subject, in this case the circle radius
           connector: {
             end: "arrow" // 'dot' also available
           },
@@ -467,7 +403,6 @@ legend.select("text")
             title: "May - June 2021",
             wrap: 200
           },
-          //settings for the subject, in this case the circle radius
           connector: {
             end: "arrow" // 'dot' also available
           },
@@ -477,6 +412,20 @@ legend.select("text")
           dx: 320
         }];
         
+      const annotations8 = [{
+          note: {
+            label: "The Delta variant causes escalating case rates in the southern US, the same states that had high case rates between June and August 2020.",
+            title: "July 2021",
+            wrap: 200
+          },
+          connector: {
+            end: "arrow" // 'dot' also available
+          },
+          x: 650,
+          y: 400,
+          dy: -250,
+          dx: 25
+        }];
         
         
         
@@ -505,6 +454,9 @@ legend.select("text")
           .type(d3.annotationLabel)
           .annotations(annotations7);
 
+        const makeAnnotations8 = d3.annotation()
+          .type(d3.annotationLabel)
+          .annotations(annotations8);
 
 	
 d3.selectAll("g.annotations").remove();
@@ -574,6 +526,12 @@ if (value == 2) {
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations7)
+;
+} else if (value == 18) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations8)
 ;
 }
 
