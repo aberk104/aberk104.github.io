@@ -384,7 +384,7 @@ legend.select("text")
           note: {
             label: "New York & New Jersey were the epicenter of the COVID-19 pandemic",
             title: "March - April 2020",
-            wrap: 190
+            wrap: 200
           },
           //settings for the subject, in this case the circle radius
           connector: {
@@ -400,7 +400,7 @@ legend.select("text")
           note: {
             label: "The southern US becomes the epicenter. First Arizona in June 2020 followed by Florida, Louisiana, Mississippi, Alabama, and Georgia.",
             title: "June - August 2020",
-            wrap: 190
+            wrap: 200
           },
           //settings for the subject, in this case the circle radius
           connector: {
@@ -408,7 +408,7 @@ legend.select("text")
           },
           x: 225,
           y: 350,
-          dy: -250,
+          dy: -200,
           dx: 450
         }]
 
@@ -416,18 +416,34 @@ legend.select("text")
           note: {
             label: "The southern US becomes the epicenter. First Arizona in June 2020 followed by Florida, Louisiana, Mississippi, Alabama, and Georgia.",
             title: "June - August 2020",
-            wrap: 190
+            wrap: 200
           },
           //settings for the subject, in this case the circle radius
           connector: {
             end: "arrow" // 'dot' also available
           },
-          x: 550,
-          y: 450,
-          dy: -200,
+          x: 650,
+          y: 400,
+          dy: -350,
           dx: 0
         }]
 
+
+      const annotations5 = [{
+          note: {
+            label: "The northern US, especially North Dakota, becomes the new epicenter with some of the highest case rates per 100K over the entire time period.",
+            title: "September - November 2020",
+            wrap: 200
+          },
+          //settings for the subject, in this case the circle radius
+          connector: {
+            end: "arrow" // 'dot' also available
+          },
+          x: 350,
+          y: 250,
+          dy: -50,
+          dx: 100
+        }]
         const makeAnnotations2 = d3.annotation()
           .type(d3.annotationLabel)
           .annotations(annotations2);
@@ -440,6 +456,11 @@ legend.select("text")
           .type(d3.annotationLabel)
           .annotations(annotations4);
 
+        const makeAnnotations5 = d3.annotation()
+          .type(d3.annotationLabel)
+          .annotations(annotations5);
+	
+	
 d3.selectAll("g.annotations").remove();
 
 if (value == 2) {
@@ -471,6 +492,24 @@ if (value == 2) {
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations4)
+;
+} else if (value == 8) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations5)
+;
+} else if (value == 9) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations5)
+;
+} else if (value == 10) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations5)
 ;
 }
 
