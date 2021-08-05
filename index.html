@@ -367,14 +367,14 @@ legend.select("text")
           subject: {
             radius: 50
           },
-          x: 873,
-          y: 363,
-          dy: -137,
-          dx: -102
+          x: 736,
+          y: 261,
+          dy: -100,
+          dx: -100
         }].map(function(d){ d.color = "#E8336D"; return d})
 
         const makeAnnotations = d3.annotation()
-          .type(d3.annotationLabel)
+          .type(d3.annotationCalloutCircle)
           .annotations(annotations);
 
 
