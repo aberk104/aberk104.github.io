@@ -442,6 +442,20 @@ legend.select("text")
           dx: 75
         }];        
         
+      const annotations10 = [{
+          note: {
+            label: "The northeastern US again has the highest case rates, although the pandemic isn't localized to these states.",
+            title: "Mar - Apr 2021",
+            wrap: 200
+          },
+          connector: {
+            end: "arrow" // 'dot' also available
+          },
+          x: 715,
+          y: 200,
+          dy: -80,
+          dx: -80
+        }];
         
         const makeAnnotations2 = d3.annotation()
           .type(d3.annotationLabel)
@@ -474,6 +488,10 @@ legend.select("text")
         const makeAnnotations9 = d3.annotation()
           .type(d3.annotationLabel)
           .annotations(annotations9);
+
+        const makeAnnotations10 = d3.annotation()
+          .type(d3.annotationLabel)
+          .annotations(annotations10);
 
 	
 d3.selectAll("g.annotations").remove();
@@ -537,6 +555,18 @@ if (value == 2) {
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations6)
+;
+} else if (value == 14) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations10)
+;
+} else if (value == 15) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations10)
 ;
 } else if (value == 16) {
         d3.select("svg")
