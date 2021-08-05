@@ -441,7 +441,7 @@ legend.select("text")
           x: 400,
           y: 175,
           dy: -25,
-          dx: 250
+          dx: 275
         }];
         
         
@@ -461,6 +461,21 @@ legend.select("text")
           dx: 450
         }];
 
+      const annotations7 = [{
+          note: {
+            label: "Much lower case rates across the US. Although certain states had higher rates, the actual case rates were much lower compared to the height of the pandemic.",
+            title: "May - June 2021",
+            wrap: 200
+          },
+          //settings for the subject, in this case the circle radius
+          connector: {
+            end: "arrow" // 'dot' also available
+          },
+          x: 275,
+          y: 300,
+          dy: -175,
+          dx: 400
+        }];
         
         
         
@@ -485,6 +500,12 @@ legend.select("text")
         const makeAnnotations6 = d3.annotation()
           .type(d3.annotationLabel)
           .annotations(annotations6);	
+
+        const makeAnnotations7 = d3.annotation()
+          .type(d3.annotationLabel)
+          .annotations(annotations7);
+
+
 	
 d3.selectAll("g.annotations").remove();
 
@@ -541,6 +562,18 @@ if (value == 2) {
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations6)
+;
+} else if (value == 16) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations7)
+;
+} else if (value == 17) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations7)
 ;
 }
 
