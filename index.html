@@ -381,15 +381,14 @@ legend.select("text")
         }].map(function(d){ d.color = "#E8336D"; return d})
 
       const annotations2 = [{
-          type: d3.annotationCalloutCircle,
           note: {
             label: "New York & New Jersey were the epicenter of the COVID-19 pandemic",
             title: "March - April 2020",
             wrap: 190
           },
           //settings for the subject, in this case the circle radius
-          subject: {
-            radius: 50
+          connector: {
+            end: "arrow" // 'dot' also available
           },
           x: 715,
           y: 200,
@@ -398,16 +397,14 @@ legend.select("text")
         }]
 
       const annotations3 = [{
-          type: d3.annotationCalloutRect,
           note: {
             label: "The southern US becomes the epicenter. First Arizona in June 2020 followed by Florida, Louisiana, Mississippi, Alabama, and Georgia.",
             title: "June - August 2020",
             wrap: 190
           },
           //settings for the subject, in this case the circle radius
-          subject: {
-            width: 580,
-	  height: 150
+          connector: {
+            end: "arrow" // 'dot' also available
           },
           x: 180,
           y: 325,
@@ -415,14 +412,33 @@ legend.select("text")
           dx: 250
         }]
 
+      const annotations4 = [{
+          note: {
+            label: "The southern US becomes the epicenter. First Arizona in June 2020 followed by Florida, Louisiana, Mississippi, Alabama, and Georgia.",
+            title: "June - August 2020",
+            wrap: 190
+          },
+          //settings for the subject, in this case the circle radius
+          connector: {
+            end: "arrow" // 'dot' also available
+          },
+          x: 480,
+          y: 325,
+          dy: -200,
+          dx: 0
+        }]
 
         const makeAnnotations2 = d3.annotation()
-          .type(d3.annotationCalloutCircle)
+          .type(d3.annotationLabel)
           .annotations(annotations2);
 
         const makeAnnotations3 = d3.annotation()
-          .type(d3.annotationCalloutRect)
+          .type(d3.annotationLabel)
           .annotations(annotations3);
+
+        const makeAnnotations4 = d3.annotation()
+          .type(d3.annotationLabel)
+          .annotations(annotations4);
 
 d3.selectAll("g.annotations").remove();
 
@@ -448,13 +464,13 @@ if (value == 2) {
         d3.select("svg")
           .append("g")
           .attr("class", "annotation-group")
-          .call(makeAnnotations3)
+          .call(makeAnnotations4)
 ;
 } else if (value == 7) {
         d3.select("svg")
           .append("g")
           .attr("class", "annotation-group")
-          .call(makeAnnotations3)
+          .call(makeAnnotations4)
 ;
 }
 
