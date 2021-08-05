@@ -310,7 +310,18 @@ legend.select("text")
 
     
 }
+const annotations = [
+  {
+    note: { label: "Hi" },
+    x: 100,
+    y: 100,
+    dy: 137,
+    dx: 162,
+    subject: { radius: 50, radiusPadding: 10 },
+  },
+];
 
+d3.annotation().annotations(annotations);
 
 </script>
 </body>
