@@ -313,7 +313,7 @@ legend.select("text")
     .text(function(d,i) { return d + " Cases per 100K"; });
 
       const annotations = [
-        {
+/*        {
           note: {
             label: "Basic settings with subject position(x,y) and a note offset(dx, dy)",
             title: "d3.annotationLabel"
@@ -352,13 +352,13 @@ legend.select("text")
           y: 150,
           dy: 137,
           dx: 262
-        },{
+        },*/{
           //below in makeAnnotations has type set to d3.annotationLabel
           //you can add this type value below to override that default
           type: d3.annotationCalloutCircle,
           note: {
-            label: "A different annotation type",
-            title: "d3.annotationCalloutCircle",
+            label: "New York & New Jersey were the epicenter of the COVID-19 pandemic",
+            title: "March - April 2020",
             wrap: 190
           },
           //settings for the subject, in this case the circle radius
@@ -366,9 +366,9 @@ legend.select("text")
             radius: 50
           },
           x: 620,
-          y: 150,
-          dy: 137,
-          dx: 102
+          y: 350,
+          dy: -137,
+          dx: -102
         }].map(function(d){ d.color = "#E8336D"; return d})
 
         const makeAnnotations = d3.annotation()
