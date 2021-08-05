@@ -182,7 +182,7 @@ if (error) throw error;
     	divt.transition()        
       	   .duration(200)      
            .style("opacity", .9);      
-           divt.html(d.properties.name + "<br>" + "Population: " + numberformat(d.properties.population) + "<br>" + "<br>" + "Cases Per 100K: " + d.caserate[currentValue] + "<br>" + "Total Monthly Cases: " + numberformat(d.monthlycases[currentValue])) + "<br>" + "Total Cases To Date: " + numberformat(d.cumulativecases[currentValue]))
+           divt.html(d.properties.name + "<br>" + "Population: " + numberformat(d.properties.population) + "<br>" + "<br>" + "Cases Per 100K: " + d.caserate[currentValue] + "<br>" + "Total Monthly Cases: " + numberformat(d.monthlycases[currentValue]) + "<br>" + "Total Cases To Date: " + numberformat(d.cumulativecases[currentValue]))
            .style("left", (d3.event.pageX) + "px")     
            .style("top", (d3.event.pageY - 30) + "px")
 	 ;})
