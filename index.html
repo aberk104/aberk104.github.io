@@ -384,7 +384,25 @@ if (value == 2) {
         d3.select("svg")
           .append("g")
           .attr("class", "annotation-group")
-          .call(makeAnnotations)
+          .annotation()
+	.annotations([{
+          //below in makeAnnotations has type set to d3.annotationLabel
+          //you can add this type value below to override that default
+          type: d3.annotationCalloutCircle,
+          note: {
+            label: "New York & New Jersey were the epicenter of the COVID-19 pandemic",
+            title: "March - April 2020",
+            wrap: 190
+          },
+          //settings for the subject, in this case the circle radius
+          subject: {
+            radius: 50
+          },
+          x: 736,
+          y: 225,
+          dy: -100,
+          dx: -100
+        }]);
 } else {
 d3.selectAll("g.annotations").remove();
 }
