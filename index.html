@@ -101,7 +101,13 @@ body {
       background-color: #696969;
     }    
 
-.annotation-note-label, .annotation-note-title {
+.annotation-note-label {
+      stroke: black;
+      font: 16px sans-serif;
+      text-decoration: underline;
+    }
+    
+.annotation-note-title {
       stroke: black;
       font: 16px sans-serif;
     }
@@ -397,7 +403,7 @@ legend.select("text")
 
 d3.selectAll("g.annotations").remove();
 
-if (value == 2) or (value == 3) {
+if (value == 2 or value == 3) {
         d3.select("svg")
           .append("g")
           .attr("class", "annotation-group")
