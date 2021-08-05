@@ -322,7 +322,7 @@ legend.append("text")
           .type(d3.annotationLabel)
           .annotations(annotations)
 
-        d3.select("path")
+        d3.select("svg")
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations)
