@@ -378,13 +378,15 @@ legend.select("text")
           .annotations(annotations);
 
 
-if (value == 3) {
+if (value == 2) {
 //d3.select("svg").selectAll("annotations").remove();
 //} else {
         d3.select("svg")
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations)
+} else {
+d3.selectAll("g.annotations").remove();
 }
 
 
