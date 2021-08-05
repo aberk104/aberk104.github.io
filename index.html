@@ -421,13 +421,26 @@ legend.select("text")
           connector: {
             end: "arrow" // 'dot' also available
           },
-          x: 650,
+          x: 500,
           y: 400,
           dy: -250,
-          dx: 25
+          dx: 175
         }];
         
-        
+      const annotations9 = [{
+          note: {
+            label: "Although Tennessee has the highest case rate, high case rates exist all across the US.",
+            title: "Dec 2020",
+            wrap: 200
+          },
+          connector: {
+            end: "arrow" // 'dot' also available
+          },
+          x: 550,
+          y: 325,
+          dy: -175,
+          dx: 125
+        }];        
         
         
         const makeAnnotations2 = d3.annotation()
@@ -457,6 +470,10 @@ legend.select("text")
         const makeAnnotations8 = d3.annotation()
           .type(d3.annotationLabel)
           .annotations(annotations8);
+
+        const makeAnnotations9 = d3.annotation()
+          .type(d3.annotationLabel)
+          .annotations(annotations9);
 
 	
 d3.selectAll("g.annotations").remove();
@@ -508,6 +525,12 @@ if (value == 2) {
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations5)
+;
+} else if (value == 11) {
+        d3.select("svg")
+          .append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations9)
 ;
 } else if (value == 12) {
         d3.select("svg")
