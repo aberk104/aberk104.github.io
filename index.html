@@ -259,6 +259,60 @@ legend.append("text")
     }
     })
 
+    
+});
+
+function step(data, legend, legendtitle) {
+  currentValue = currentValue + 1;
+  playButton.text("Next");
+  updateFill(data, currentValue, legend, legendtitle);
+  previousButton.text("Previous");
+    if (currentValue >= targetValue) {
+    playButton.text("Restart");
+  }
+  if (currentValue > 0) {
+  previousButton.text("Previous");
+  previousButton.style("visibility","visible");
+}
+  console.log(currentValue, targetValue);
+}
+
+function backstep(data, legend, legendtitle) {
+  currentValue = currentValue - 1;
+  previousButton.text("Previous");
+  if (currentValue < targetValue) {
+	playButton.text("Next");
+     }
+  updateFill(data, currentValue, legend, legendtitle);
+    if (currentValue <= 0) {
+	previousButton.text("Previous");
+	previousButton.style("visibility", "hidden");
+       }
+
+  console.log(currentValue, targetValue);
+}
+
+function updateFill(data, value, legend, legendtitle) {
+    var max = d3.max(data, function(d) {return d.caserate[value]; });
+    var min = d3.min(data, function(d) {return d.caserate[value]; });
+
+    var legenddata = [min,max];
+
+    svg.selectAll('path')
+        .data(data)
+        .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
+
+legendtitle.select("text").text(sliderdates[value]);
+
+legend.select("rect")
+    .data(legenddata.slice().reverse())
+    .style("fill", function(d,i) {return myColor(d / max); });
+
+legend.select("text")
+    .data(legenddata.slice().reverse())
+    .text(function(d,i) { return d + " Cases per 100K"; });
+
+
       const annotations = [
         {
           note: {
@@ -326,58 +380,10 @@ legend.append("text")
           .append("g")
           .attr("class", "annotation-group")
           .call(makeAnnotations)
-    
-});
 
-function step(data, legend, legendtitle) {
-  currentValue = currentValue + 1;
-  playButton.text("Next");
-  updateFill(data, currentValue, legend, legendtitle);
-  previousButton.text("Previous");
-    if (currentValue >= targetValue) {
-    playButton.text("Restart");
-  }
-  if (currentValue > 0) {
-  previousButton.text("Previous");
-  previousButton.style("visibility","visible");
-}
-  console.log(currentValue, targetValue);
-}
 
-function backstep(data, legend, legendtitle) {
-  currentValue = currentValue - 1;
-  previousButton.text("Previous");
-  if (currentValue < targetValue) {
-	playButton.text("Next");
-     }
-  updateFill(data, currentValue, legend, legendtitle);
-    if (currentValue <= 0) {
-	previousButton.text("Previous");
-	previousButton.style("visibility", "hidden");
-       }
 
-  console.log(currentValue, targetValue);
-}
 
-function updateFill(data, value, legend, legendtitle) {
-    var max = d3.max(data, function(d) {return d.caserate[value]; });
-    var min = d3.min(data, function(d) {return d.caserate[value]; });
-
-    var legenddata = [min,max];
-
-    svg.selectAll('path')
-        .data(data)
-        .attr("fill", function(d) {return myColor(d.caserate[value] / max); });
-
-legendtitle.select("text").text(sliderdates[value]);
-
-legend.select("rect")
-    .data(legenddata.slice().reverse())
-    .style("fill", function(d,i) {return myColor(d / max); });
-
-legend.select("text")
-    .data(legenddata.slice().reverse())
-    .text(function(d,i) { return d + " Cases per 100K"; });
 
     
 }
